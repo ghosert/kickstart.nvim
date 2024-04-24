@@ -617,7 +617,7 @@ require('lazy').setup({
     end,
   },
 
-  { -- Autoformat
+  { -- Autoformat jiawzhang: auto format when typing :w to save lua file using 'stylua' LSP formatter.
     'stevearc/conform.nvim',
     lazy = false,
     keys = {
