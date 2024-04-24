@@ -773,6 +773,7 @@ require('lazy').setup({
     --
     --  jiawzhang commented
     -- 'folke/tokyonight.nvim',
+    -- 'Mofiqul/dracula.nvim',
     'ellisonleao/gruvbox.nvim',
 
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -783,6 +784,7 @@ require('lazy').setup({
       --
       --  jiawzhang commented
       -- vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'dracula'
       vim.cmd.colorscheme 'gruvbox'
 
       -- You can configure highlights by doing something like:
