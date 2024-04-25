@@ -790,7 +790,7 @@ require('lazy').setup({
       -- vim.cmd.colorscheme 'gruvbox'
       -- vim.cmd.colorscheme 'melange'
       -- vim.opt.termguicolors = true -- just for melange above
-      vim.cmd.colorscheme 'nightfox'
+      vim.cmd.colorscheme 'terafox'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
