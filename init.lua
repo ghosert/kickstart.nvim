@@ -772,9 +772,10 @@ require('lazy').setup({
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     --
     --  jiawzhang commented
-    -- 'folke/tokyonight.nvim',
+    'folke/tokyonight.nvim',
     -- 'Mofiqul/dracula.nvim',
-    'ellisonleao/gruvbox.nvim',
+    -- 'ellisonleao/gruvbox.nvim',
+    -- 'savq/melange-nvim',
 
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
@@ -783,9 +784,11 @@ require('lazy').setup({
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       --
       --  jiawzhang commented
-      -- vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight-moon'
       -- vim.cmd.colorscheme 'dracula'
-      vim.cmd.colorscheme 'gruvbox'
+      -- vim.cmd.colorscheme 'gruvbox'
+      -- vim.cmd.colorscheme 'melange'
+      -- vim.opt.termguicolors = true -- just for melange above
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
