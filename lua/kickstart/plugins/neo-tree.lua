@@ -18,6 +18,7 @@ return {
       filtered_items = {
         hide_dotfiles = false,
       },
+      use_libuv_file_watcher = true,
       window = {
         mappings = {
           ['\\'] = 'close_window',
