@@ -361,6 +361,8 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
+
+        ---- jiawzhang: in telescope find_files, live_grep and grep_string, ignore build/cache files but including hidden folder/file
         pickers = {
           find_files = {
             file_ignore_patterns = { 'node_modules', '.git', '.venv' },
@@ -880,7 +882,7 @@ require('lazy').setup({
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
-  {
+  { -- jiawzhang NOTE: Add lualine to show something different in status line.
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
