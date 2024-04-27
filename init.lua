@@ -880,6 +880,50 @@ require('lazy').setup({
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'auto',
+        },
+        sections = {
+          lualine_c = {
+            { 'filename', path = 3 },
+          },
+          lualine_b = {
+            {
+              'branch',
+            },
+            {
+              'diff',
+              colored = true, -- Displays a colored diff status if set to true
+              diff_color = {
+                -- Same color values as the general color option can be used here.
+                added = { fg = '#99c794' },
+                modified = { fg = '#5bb7b8' },
+                removed = { fg = '#ec5f67' },
+              },
+              symbols = { added = '+', modified = '~', removed = '-' }, -- Changes the symbols used by the diff.
+              source = nil, -- A function that works as a data source for diff.
+              -- It must return a table as such:
+              --   { added = add_count, modified = modified_count, removed = removed_count }
+              -- or nil on failure. count <= 0 won't be displayed.
+            },
+            {
+              'diagnostics',
+            },
+          },
+        },
+        inactive_sections = {
+          lualine_c = {
+            { 'filename', path = 3 },
+          },
+        },
+      }
+    end,
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
