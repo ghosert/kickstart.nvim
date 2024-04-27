@@ -574,7 +574,7 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {}, -- jiawzhang uncomment this to enable python LSP
+        -- pyright = {}, -- jiawzhang TODO: uncomment this to enable python LSP
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
