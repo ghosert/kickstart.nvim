@@ -6,7 +6,11 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        -- markdown = { 'markdownlint' },
+        javascript = { 'quick-lint-js' }, -- jiawzhang: 'quick-lint-js' should have been installed in init.lua
+        typescript = { 'quick-lint-js' },
+        javascriptreact = { 'quick-lint-js' },
+        typescriptreact = { 'quick-lint-js' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

@@ -637,7 +637,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'prettierd', -- jiawzhang add for javascript formatter
         'prettier', -- jiawzhang add for javascript formatter
-        -- 'eslint_d', -- jiawzhang add for javascript linter in the future(uncomment "require 'kickstart.plugins.lint'" below), 'tsserver' works well already, the alternative could be 'quick-lint-js' https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
+        'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below), 'tsserver' works together as well, 'quick-lint-js' details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -962,7 +962,7 @@ require('lazy').setup({
   --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint', -- jiawzhang: open for javascript linter TODO: uncomment this may cause problem when opening ".md" file
+  require 'kickstart.plugins.lint', -- jiawzhang: open for javascript linter, and other languages.
   -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree', -- jiawzhang: type "\" in normal mode to show or close file tree.
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
