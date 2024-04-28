@@ -193,6 +193,12 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- jiawzhang set 2 spaces for tab in any case
+vim.cmd 'set expandtab'
+vim.cmd 'set tabstop=2'
+vim.cmd 'set softtabstop=2'
+vim.cmd 'set shiftwidth=2'
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -582,8 +588,23 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
+        tsserver = {}, -- jiawzhang open for typescript/javascript lsp, to check data type in javascript, create "jsconfig.json" to the root of your project with content below:
+        --[[
+                {
+                  "compilerOptions": {
+                    "module": "commonjs",
+                    "target": "es6",
+                    "checkJs": true,
+                    "allowJs": true,
+                  },
+                  "exclude": [
+                    "node_modules"
+                  ]
+                }
+        --]]
+
+        -- NOTE: jiawzhang: server_configurations details can be found here:
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 
         lua_ls = {
           -- cmd = {...},
@@ -614,6 +635,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettierd', -- jiawzhang add for javascript formatter
+        'prettier', -- jiawzhang add for javascript formatter
+        -- 'eslint_d', -- jiawzhang add for javascript linter in the future(uncomment "require 'kickstart.plugins.lint'" below), 'tsserver' works well already, the alternative could be 'quick-lint-js' https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -664,7 +688,7 @@ require('lazy').setup({
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        javascript = { { 'prettierd', 'prettier' } }, -- jiawzhang: add for javascript formatter
       },
     },
   },
@@ -855,7 +879,7 @@ require('lazy').setup({
     build = ':TSUpdate',
     opts = {
       ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
+      -- Autoinstall languages that are not installed, jiawzhang NOTE: Due to 'auto_install' below 'ensure_installed' doesn't matter
       auto_install = true,
       highlight = {
         enable = true,
