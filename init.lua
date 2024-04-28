@@ -962,7 +962,7 @@ require('lazy').setup({
   --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  -- require 'kickstart.plugins.lint', -- jiawzhang: open for javascript linter TODO: uncomment this may cause problem when opening ".md" file
   -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree', -- jiawzhang: type "\" in normal mode to show or close file tree.
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps

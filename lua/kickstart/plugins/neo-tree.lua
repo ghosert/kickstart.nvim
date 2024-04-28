@@ -16,15 +16,28 @@ return {
   opts = {
     filesystem = {
       filtered_items = {
-        hide_dotfiles = false,
+        -- visible = true,
+        show_hidden_count = true,
+        hide_dotfiles = false, -- jiawzhang: show hidden files
+        hide_gitignored = true,
       },
       use_libuv_file_watcher = true,
       window = {
         mappings = {
           ['\\'] = 'close_window',
           ['z'] = 'close_all_nodes',
-          ['Z'] = 'expand_all_nodes',
+          ['Z'] = 'expand_all_nodes', -- jiawzhang: 'Z' to expand all nodes
         },
+      },
+    },
+    -- NOTE: jiawzhang install: "sudo apt install fd-find", this will fix fuzzy_find bug with "find" linux command.
+    find_command = 'fd', -- this is determined automatically, you probably don't need to set it
+    find_args = { -- you can specify extra args to pass to the find command.
+      fd = {
+        '--exclude',
+        '.git',
+        '--exclude',
+        'node_modules',
       },
     },
   },
