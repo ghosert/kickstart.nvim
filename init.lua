@@ -447,6 +447,11 @@ require('lazy').setup({
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
+      -- NOTE: jiawzhang add for method signature help when typing signature for the plugin doesn't support it like tsserver javascript/typescript
+      {
+        'ray-x/lsp_signature.nvim',
+        event = 'VeryLazy',
+      },
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -568,6 +573,32 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      -- NOTE: jiawzhang: when typing method signature, show help if the  plugin doesn't support it like tsserver lsp for javascript. https://github.com/ray-x/lsp_signature.nvim
+      -- TODO: jiawzhang: Add this to any local lsp below like tsserver if you want to have this feature applied to that lsp.
+      local lsp_signature_on_attach = function(client, bufnr)
+        -- Enable signature help
+        require('lsp_signature').on_attach({
+          bind = true,
+          handler_opts = {
+            border = 'rounded',
+          },
+          floating_window = true,
+          fix_pos = true,
+          hint_enable = true,
+          hint_prefix = '<>',
+          hint_scheme = 'String',
+          use_lspsaga = false,
+          hi_parameter = 'Search',
+          max_height = 12,
+          max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+          transpancy = 10,
+          shadow_blend = 36,
+          shadow_guibg = 'Black',
+          timer_interval = 200,
+          extra_trigger_chars = {}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+        }, bufnr)
+      end
+
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -588,7 +619,9 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {}, -- jiawzhang open for typescript/javascript lsp, to check data type in javascript, create "jsconfig.json" to the root of your project with content below:
+        tsserver = {
+          on_attach = lsp_signature_on_attach,
+        }, -- jiawzhang open for typescript/javascript lsp, to check data type in javascript, create "jsconfig.json" to the root of your project with content below:
         --[[
                 {
                   "compilerOptions": {
