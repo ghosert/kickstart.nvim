@@ -16,4 +16,4 @@ conole.log("wefee");
 // import
 //
 
-// test("World"); // TODO: jiawzhang: how to complete parameters inside method parentheses
+// test("World"); // NOTE: jiawzhang: lsp_signature.vim helped on method signature help
