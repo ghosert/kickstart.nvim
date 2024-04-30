@@ -670,7 +670,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'prettierd', -- jiawzhang add for javascript formatter
         'prettier', -- jiawzhang add for javascript formatter
-        'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below), 'tsserver' works together as well, 'quick-lint-js' details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
+        'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below, and go to that lint.lua to config linter.), 'tsserver' works together as well, 'quick-lint-js' details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
