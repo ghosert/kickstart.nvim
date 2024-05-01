@@ -983,6 +983,44 @@ require('lazy').setup({
       }
     end,
   },
+  { -- jiawzhang add for dashboard page when opening nvim, ascii art below is generated from 'https://lazesoftware.com/en/tool/brailleaagen/'
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+
+    config = function()
+      local dashboard = require 'alpha.themes.startify'
+      dashboard.section.header.val = {
+        [[⡀⡀⡀⡀⡀⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⡀⡀⡀⡀⡀⡀⣠⣀⡀⡀⡀⡀⡀⡀⡀⣀⡀⡀⡀⡀⡀⡀⣤⡀⡀⣤⡀⡀⡀⡀⡀⡀⢀⣄⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⡀⡀⡀⡀⣀⡀⡀⡀⡀⡀⡀⡀]],
+        [[⡀⡀⡀⡀⣼⡿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⣀⣀⣈⣿⣄⣀⣀⣀⣠⣿⣁⣀⣀⡀⡀⡀⡀⡀⢿⣆⡀⡀⢠⣤⣤⣿⣤⣴⣿⣤⣤⡄⡀⡀⡀⣿⣧⣤⣤⣤⣤⡀⢠⣤⣤⣤⣤⣤⣤⡀⡀⡀⡀⡀⣰⡿⡀⡀⡀⡀⠈⣿⡀⡀⡀⡀⡀⡀]],
+        [[⡀⡀⡀⣰⣿⠁⡀⣶⣶⣶⣶⣶⣶⣶⣶⣶⡀⡀⡀⠉⠉⠉⠉⠉⠉⠉⣿⠉⠉⠉⠉⠉⠉⠁⡀⡀⣶⣶⣶⣶⣶⡄⢸⣇⣀⣿⣀⣀⣿⣀⣸⡇⡀⡀⣾⠏⡀⢸⣿⡀⡀⡀⢸⣿⡀⡀⡀⢸⣿⡀⡀⡀⡀⢠⣿⡀⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⣶⡀]],
+        [[⡀⡀⣰⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⠛⠛⠛⠛⠛⠻⣿⠛⠛⠛⠛⠛⠃⡀⡀⡀⡀⡀⡀⢀⣿⠁⢸⡏⠉⣿⠉⠉⣿⠉⢹⡇⡀⡀⠿⠿⠿⣿⡿⠿⠿⠿⢸⣿⡀⡀⡀⢸⣿⡀⡀⡀⢠⣿⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀]],
+        [[⢀⣾⡿⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢰⣶⣶⣶⣶⣶⣶⣾⣿⣶⣶⣶⣶⣶⣶⣶⡀⡀⡀⡀⢀⣿⠃⡀⠘⠛⠛⠛⠛⠛⠛⠛⠛⠃⡀⡀⡀⡀⣴⡿⠿⣶⣀⡀⢸⣿⣤⣤⣤⣾⣿⡀⡀⣠⣿⢹⣿⡀⡀⠛⠛⠛⠛⠛⠛⠛⠛⠛⡀⡀]],
+        [[⡀⠟⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣤⣤⣶⣶⡶⠿⠟⡀⣿⡇⡀⠿⣶⣄⡀⡀⡀⡀⣴⣿⣿⣦⡀⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⡀⡀⣴⡿⠋⡀⡀⡀⠻⠁⡀⡀⡀⡀⡀⡀⡀⡀⡀⠘⠁⢸⣿⡀⡀⣴⣶⣶⣶⣶⣶⣶⣶⣶⡀⡀]],
+        [[⡀⡀⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢀⣀⣀⣀⣿⣧⣀⣀⣀⣽⣷⣀⣀⣀⣙⣀⡀⡀⣿⠟⢹⡇⠻⡷⡀⣿⠿⠿⠿⠿⠿⠿⣿⡀⡀⡀⡀⡀⣿⡿⠿⠿⠿⠿⠿⠿⠿⠿⣿⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀]],
+        [[⡀⡀⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⠈⠉⠉⠉⣿⡏⠉⠉⠉⠉⣿⡉⠉⣩⣭⠉⡀⡀⡀⡀⢸⡇⡀⡀⡀⣿⣀⣀⣀⣀⣀⣀⣿⡀⡀⡀⡀⡀⣿⣧⣀⣀⣀⣀⣀⣀⣀⣀⣿⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⣿⠛⠛⠛⠛⠛⠛⠛⣿⡀⡀]],
+        [[⡀⡀⡀⣿⡇⡀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⡀⢸⠿⠿⠿⣿⡟⠛⠛⠋⡀⠹⣿⣾⠛⡀⢀⡀⡀⡀⡀⢸⡇⡀⡀⡀⡀⢴⡄⡀⡀⢀⣦⡀⡀⡀⡀⡀⡀⣿⡏⠉⠉⠉⠉⠉⠉⠉⠉⣿⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⣿⡀⡀⡀⡀⡀⡀⡀⣿⡀⡀]],
+        [[⡀⡀⡀⣿⡇⡀⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⡀⡀⡀⣀⣀⣿⡇⡀⣤⣴⣿⠟⠙⣿⣦⣄⣼⠇⡀⡀⡀⢸⡇⡀⢠⣤⣤⣤⣿⣤⣤⣿⣥⣤⣤⡀⡀⡀⡀⣿⣷⣶⣶⣶⣶⣶⣶⣶⣶⣿⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⣿⣶⣶⣶⣶⣶⣶⣶⣿⡀⡀]],
+        [[⡀⡀⡀⠉⠁⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⠉⠉⠉⡀⡀⠈⡀⡀⡀⡀⡀⠈⠉⠉⡀⡀⡀⡀⠈⠁⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⠉⠁⡀⡀⡀⡀⡀⡀⡀⡀⠉⡀⡀⡀⡀⡀⡀⠈⠉⡀⡀⠉⡀⡀⡀⡀⡀⡀⡀⠉⡀⡀]],
+      }
+      -- Define a custom section for bookmarks with interactive buttons
+      local bookmarks_section = {
+        type = 'group',
+        val = {
+          { type = 'padding', val = 1 },
+          { type = 'text', val = 'Bookmarks', opts = { hl = 'SpecialComment', shrink_margin = false } },
+          { type = 'padding', val = 1 },
+          -- Add your bookmarks as buttons here
+          dashboard.button('a', 'nvim init.lua', ':e ~/.config/nvim/init.lua <CR>'),
+          -- Add more bookmarks as needed
+        },
+        opts = {},
+      }
+
+      -- Add the bookmarks section to the dashboard config
+      table.insert(dashboard.section.top_buttons.val, bookmarks_section)
+      require('alpha').setup(dashboard.opts)
+    end,
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
