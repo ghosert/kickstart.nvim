@@ -447,6 +447,7 @@ require('lazy').setup({
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
+
       -- NOTE: jiawzhang add for method signature help when typing signature for the plugin doesn't support it like tsserver javascript/typescript
       {
         'ray-x/lsp_signature.nvim',
