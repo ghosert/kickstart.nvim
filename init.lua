@@ -650,7 +650,7 @@ require('lazy').setup({
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -671,7 +671,7 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'prettierd', -- jiawzhang add for javascript formatter
         'prettier', -- jiawzhang add for javascript formatter
-        'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below, and go to that lint.lua to config linter.), 'tsserver' works together as well, 'quick-lint-js' details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
+        'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below, and go to that lint.lua to config linter.), 'tsserver' works together as well, but 'quick-lint-js' provide more error check like undefined variables, details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1032,7 +1032,7 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint', -- jiawzhang: open for javascript linter, and other languages.
   -- require 'kickstart.plugins.autopairs',
