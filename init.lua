@@ -1022,6 +1022,88 @@ require('lazy').setup({
       require('alpha').setup(dashboard.opts)
     end,
   },
+  { -- jiawzhang add for chatgpt integration, details with shortcuts: https://github.com/jackmort/chatgpt.nvim?tab=readme-ov-file
+    --[[
+        When using `ChatGPT` and `ChatGPTEditWithInstructions`, the following
+        keybindings are available:
+
+        - `<C-Enter>` [Both] to submit.
+        - `<C-y>` [Both] to copy/yank last answer.
+        - `<C-o>` [Both] Toggle settings window.
+        - `<C-h>` [Both] Toggle help window.
+        - `<Tab>` [Both] Cycle over windows.
+        - `<C-f>` [Chat] Cycle over modes (center, stick to right).
+        - `<C-c>` [Both] to close chat window.
+        - `<C-p>` [Chat] Toggle sessions list.
+        - `<C-u>` [Chat] scroll up chat window.
+        - `<C-d>` [Chat] scroll down chat window.
+        - `<C-k>` [Chat] to copy/yank code from last answer.
+        - `<C-n>` [Chat] Start new session.
+        - `<C-r>` [Chat] draft message (create message without submitting it to server)
+        - `<C-r>` [Chat] switch role (switch between user and assistant role to define a workflow)
+        - `<C-s>` [Both] Toggle system message window.
+        - `<C-i>` [Edit Window] use response as input.
+        - `<C-d>` [Edit Window] view the diff between left and right panes and use diff-mode
+          commands
+
+        When the setting window is opened (with `<C-o>`), settings can be modified by
+        pressing `Enter` on the related config. Settings are saved across sections
+    --]]
+    'jackMort/ChatGPT.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      'nvim-lua/plenary.nvim',
+      'folke/trouble.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    event = 'VeryLazy',
+    config = function()
+      require('chatgpt').setup {
+        api_key_cmd = nil,
+        openai_params = {
+          model = 'gpt-4-turbo',
+          frequency_penalty = 0,
+          presence_penalty = 0,
+          max_tokens = 1000,
+          temperature = 0,
+          top_p = 1,
+          n = 1,
+        },
+        openai_edit_params = {
+          model = 'gpt-4-turbo',
+          frequency_penalty = 0,
+          presence_penalty = 0,
+          temperature = 0,
+          top_p = 1,
+          n = 1,
+        },
+      }
+
+      -- jiawzhang, chatgpt shortcuts: <leader>C + c/e/g etc..
+      require('which-key').register({
+        a = {
+          name = 'ChatGPT',
+          c = { '<cmd>ChatGPT<CR>', 'ChatGPT' },
+          e = { '<cmd>ChatGPTEditWithInstruction<CR>', 'Edit with instruction', mode = { 'n', 'v' } },
+          g = { '<cmd>ChatGPTRun grammar_correction<CR>', 'Grammar Correction', mode = { 'n', 'v' } },
+          t = { '<cmd>ChatGPTRun translate<CR>', 'Translate', mode = { 'n', 'v' } },
+          k = { '<cmd>ChatGPTRun keywords<CR>', 'Keywords', mode = { 'n', 'v' } },
+          d = { '<cmd>ChatGPTRun docstring<CR>', 'Docstring', mode = { 'n', 'v' } },
+          a = { '<cmd>ChatGPTRun add_tests<CR>', 'Add Tests', mode = { 'n', 'v' } },
+          o = { '<cmd>ChatGPTRun optimize_code<CR>', 'Optimize Code', mode = { 'n', 'v' } },
+          s = { '<cmd>ChatGPTRun summarize<CR>', 'Summarize', mode = { 'n', 'v' } },
+          f = { '<cmd>ChatGPTRun fix_bugs<CR>', 'Fix Bugs', mode = { 'n', 'v' } },
+          x = { '<cmd>ChatGPTRun explain_code<CR>', 'Explain Code', mode = { 'n', 'v' } },
+          r = { '<cmd>ChatGPTRun roxygen_edit<CR>', 'Roxygen Edit', mode = { 'n', 'v' } },
+          l = { '<cmd>ChatGPTRun code_readability_analysis<CR>', 'Code Readability Analysis', mode = { 'n', 'v' } },
+          -- shortcuts added by jiawzhang
+          A = { '<cmd>ChatGPTActAs<CR>', 'Act As ...', mode = { 'n', 'v' } },
+          m = { '<cmd>ChatGPTCompleteCode<CR>', 'Complete Code', mode = { 'n', 'v' } },
+          h = { '<cmd>help ChatGPT<CR>', 'Help Doc on ChatGPT', mode = { 'n', 'v' } },
+        },
+      }, { prefix = '<leader>' })
+    end,
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
