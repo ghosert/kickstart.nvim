@@ -1104,6 +1104,13 @@ require('lazy').setup({
       }, { prefix = '<leader>' })
     end,
   },
+  { -- jiawzhang, add for use ctrl + hjkl to move focus from neovim to another tmux window.
+    'christoomey/vim-tmux-navigator',
+    vim.keymap.set('n', '<C-h>', ':TmuxNavigateLeft<CR>'),
+    vim.keymap.set('n', '<C-j>', ':TmuxNavigateDown<CR>'),
+    vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>'),
+    vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>'),
+  },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
