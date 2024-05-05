@@ -654,6 +654,10 @@ require('lazy').setup({
             },
           },
         },
+
+        -- jiawzhang add LSP mason for docker
+        docker_compose_language_service = {},
+        dockerls = {},
       }
 
       -- Ensure the servers and tools above are installed
