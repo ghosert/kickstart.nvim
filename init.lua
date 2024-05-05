@@ -655,7 +655,7 @@ require('lazy').setup({
           },
         },
 
-        -- jiawzhang add LSP mason for docker
+        -- jiawzhang add LSP mason for docker, use ":LspInfo" command to check the current LSP is using after opening some filetype
         docker_compose_language_service = {},
         dockerls = {},
       }
