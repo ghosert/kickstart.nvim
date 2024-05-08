@@ -45,6 +45,9 @@ Kickstart Guide:
 
   TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
+  NOTE: jiawzhang nvim setup: https://www.youtube.com/watch?v=m8C0Cq9Uv9o
+  NOTE: jiawzhang nvim setup: https://www.youtube.com/watch?v=S-xzYgTLVJE&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&index=3
+
     If you don't know what this means, type the following:
       - <escape key>
       - :
@@ -1115,6 +1118,12 @@ require('lazy').setup({
     vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>'),
     vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>'),
   },
+
+  -- TODO:jiawzhang
+  -- try AI plugins for neovim, ropilot plugin, COC neovim LSP plugins, check the saved list below:
+  -- https://www.youtube.com/playlist?list=PLkX2COZxBVRB-rElIpog6nYDPJBnHYJxq
+  -- Install LSP/DAP/LINTER/FORMATTER for javascript, python, java, (html, css, json, markdown, vscode-langservers-extracted):
+  -- https://www.youtube.com/watch?v=ybUE4D80XSk
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
