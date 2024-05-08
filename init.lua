@@ -1018,7 +1018,11 @@ require('lazy').setup({
           { type = 'text', val = 'Bookmarks', opts = { hl = 'SpecialComment', shrink_margin = false } },
           { type = 'padding', val = 1 },
           -- Add your bookmarks as buttons here
-          dashboard.button('a', 'nvim init.lua', ':e ~/.config/nvim/init.lua <CR>'),
+          dashboard.button('d', 'dev Dockerfile', ':e ~/docker/Dockerfile <CR>'),
+          dashboard.button('n', 'nvim init.lua', ':e ~/.config/nvim/init.lua <CR>'),
+          dashboard.button('p', '.p10k.zsh', ':e ~/.p10k.zsh <CR>'),
+          dashboard.button('t', '.tmux.conf', ':e ~/.tmux.conf <CR>'),
+          dashboard.button('z', '.zshrc', ':e ~/.zshrc <CR>'),
           -- Add more bookmarks as needed
         },
         opts = {},
