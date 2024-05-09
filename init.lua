@@ -1018,6 +1018,7 @@ require('lazy').setup({
           { type = 'text', val = 'Bookmarks', opts = { hl = 'SpecialComment', shrink_margin = false } },
           { type = 'padding', val = 1 },
           -- Add your bookmarks as buttons here
+          dashboard.button('o', 'Note-Taking', ':e ~/VimProject/note.md <CR>'),
           dashboard.button('d', 'dev Dockerfile', ':e ~/docker/Dockerfile <CR>'),
           dashboard.button('s', 'dev docker script', ':e ~/docker/docker.sh <CR>'),
           dashboard.button('n', 'nvim init.lua', ':e ~/.config/nvim/init.lua <CR>'),
