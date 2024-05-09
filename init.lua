@@ -202,6 +202,10 @@ vim.cmd 'set tabstop=2'
 vim.cmd 'set softtabstop=2'
 vim.cmd 'set shiftwidth=2'
 
+-- jiawzhang added to open terminal in a seprate view
+vim.api.nvim_create_user_command('Vspt', 'vsplit | terminal', {})
+vim.api.nvim_create_user_command('Spt', 'split | terminal', {})
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
