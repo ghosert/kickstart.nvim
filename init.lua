@@ -226,16 +226,6 @@ vim.api.nvim_create_user_command('Git', git_commit, {
   complete = 'file', -- Use file completion
   desc = 'Perform git commit on the current repository with a message', -- Description for :help
 })
---[[
-vim.api.nvim_create_user_command('Git', function(input)
-  -- Save the current file's directory
-  local file_dir = vim.fn.expand '%:p:h'
-  -- Change the working directory to the file's directory
-  vim.cmd('cd ' .. vim.fn.shellescape(file_dir))
-  -- Commit with the provided message
-  vim.cmd('!git commit -a -m ' .. vim.fn.shellescape(input.args))
-end, { nargs = 1 })
---]]
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
