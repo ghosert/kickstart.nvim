@@ -207,7 +207,7 @@ vim.api.nvim_create_user_command('Vspt', 'vsplit | terminal', {})
 vim.api.nvim_create_user_command('Spt', 'split | terminal', {})
 -- jiawzhang: type :Git 'any comments' to submit changes
 -- Function to perform git commit
-local function git_commit(args)
+local function git_commit(input)
   -- Get the current file's directory
   local file_dir = vim.fn.expand '%:p:h'
 
@@ -215,7 +215,10 @@ local function git_commit(args)
   vim.cmd('cd ' .. file_dir)
 
   -- Run the git commit command with the provided message
-  vim.cmd('!git commit -a -m ' .. args.args)
+  vim.cmd('!git commit -a -m ' .. vim.fn.shellescape(input.args))
+
+  -- Optionally, change back to the original directory if needed
+  -- vim.cmd('cd -')
 end
 -- Create the user command "Git"
 vim.api.nvim_create_user_command('Git', git_commit, {
@@ -231,8 +234,6 @@ vim.api.nvim_create_user_command('Git', function(input)
   vim.cmd('cd ' .. vim.fn.shellescape(file_dir))
   -- Commit with the provided message
   vim.cmd('!git commit -a -m ' .. vim.fn.shellescape(input.args))
-  -- Optionally, change back to the original directory if needed
-  -- vim.cmd('cd -')
 end, { nargs = 1 })
 --]]
 
