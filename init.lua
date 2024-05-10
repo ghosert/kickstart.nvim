@@ -215,7 +215,7 @@ local function git_commit(args)
   vim.cmd('cd ' .. file_dir)
 
   -- Run the git commit command with the provided message
-  vim.cmd('!git commit -a -m "' .. args.args .. '"')
+  vim.cmd('!git commit -a -m ' .. args.args)
 end
 -- Create the user command "Git"
 vim.api.nvim_create_user_command('Git', git_commit, {
