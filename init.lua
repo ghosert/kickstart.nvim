@@ -43,7 +43,7 @@ What is Kickstart?
 
 Kickstart Guide:
 
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
+  NOTE: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
   NOTE: jiawzhang nvim setup: https://www.youtube.com/watch?v=m8C0Cq9Uv9o
   NOTE: jiawzhang nvim setup: https://www.youtube.com/watch?v=S-xzYgTLVJE&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&index=3
@@ -205,6 +205,39 @@ vim.cmd 'set shiftwidth=2'
 -- jiawzhang added to open terminal in a seprate view
 vim.api.nvim_create_user_command('Vspt', 'vsplit | terminal', {})
 vim.api.nvim_create_user_command('Spt', 'split | terminal', {})
+-- jiawzhang: type :Git 'any comments' to submit changes
+-- Function to perform git commit
+local function git_commit(args)
+  -- Get the current file's directory
+  local file_dir = vim.fn.expand '%:p:h'
+
+  -- Change to the directory of the current file
+  vim.cmd('cd ' .. file_dir)
+
+  -- Run the git commit command with the provided message
+  vim.cmd('!git commit -a -m "' .. args.args .. '"')
+end
+-- Create the user command "Git"
+vim.api.nvim_create_user_command('Git', git_commit, {
+  nargs = 1, -- This command requires one argument
+  complete = 'file', -- Use file completion
+  desc = 'Perform git commit on the current repository with a message', -- Description for :help
+})
+--[[
+vim.api.nvim_create_user_command('Git', function(input)
+  -- Save the current file's directory
+  local file_dir = vim.fn.expand '%:p:h'
+  -- Change the working directory to the file's directory
+  vim.cmd('cd ' .. vim.fn.shellescape(file_dir))
+  -- Commit with the provided message
+  vim.cmd('!git commit -a -m ' .. vim.fn.shellescape(input.args))
+  -- Optionally, change back to the original directory if needed
+  -- vim.cmd('cd -')
+end, { nargs = 1 })
+--]]
+-- vim.api.nvim_create_user_command('Git', function(input)
+--   vim.cmd('!git commit -a -m ' .. vim.fn.shellescape(input.args))
+-- end, { nargs = 1 })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -582,7 +615,7 @@ require('lazy').setup({
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- NOTE: jiawzhang: when typing method signature, show help if the  plugin doesn't support it like tsserver lsp for javascript. https://github.com/ray-x/lsp_signature.nvim
-      -- TODO: jiawzhang: Add this to any local lsp below like tsserver if you want to have this feature applied to that lsp.
+      -- NOTE: jiawzhang: Add this to any local lsp below like tsserver if you want to have this feature applied to that lsp.
       local lsp_signature_on_attach = function(client, bufnr)
         -- Enable signature help
         require('lsp_signature').on_attach({
@@ -1078,7 +1111,7 @@ require('lazy').setup({
       require('chatgpt').setup {
         api_key_cmd = nil,
         openai_params = {
-          model = 'gpt-4-turbo',
+          model = 'gpt-4-turbo', -- NOTE: jiawzhang: replace gpt-4turbo if newer model comes.
           frequency_penalty = 0,
           presence_penalty = 0,
           max_tokens = 1000,
@@ -1087,7 +1120,7 @@ require('lazy').setup({
           n = 1,
         },
         openai_edit_params = {
-          model = 'gpt-4-turbo',
+          model = 'gpt-4-turbo', -- NOTE: jiawzhang: replace gpt-4turbo if newer model comes.
           frequency_penalty = 0,
           presence_penalty = 0,
           temperature = 0,
