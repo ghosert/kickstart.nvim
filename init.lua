@@ -235,9 +235,6 @@ vim.api.nvim_create_user_command('Git', function(input)
   -- vim.cmd('cd -')
 end, { nargs = 1 })
 --]]
--- vim.api.nvim_create_user_command('Git', function(input)
---   vim.cmd('!git commit -a -m ' .. vim.fn.shellescape(input.args))
--- end, { nargs = 1 })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
