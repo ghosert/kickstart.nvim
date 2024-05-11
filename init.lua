@@ -208,14 +208,19 @@ vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>:pwd<CR>', { desc = 'Set file loc
 -- jiawzhang added to open terminal in a seprate view
 vim.api.nvim_create_user_command('Vspt', 'vsplit | terminal', {})
 vim.api.nvim_create_user_command('Spt', 'split | terminal', {})
--- jiawzhang: type :Gc 'any comments' to submit changes
-vim.api.nvim_create_user_command('Gc', function(input)
+
+-- jiawzhang cd current file location
+local cd_pwd = function()
   -- Get the current file's directory
   local file_dir = vim.fn.expand '%:p:h'
 
   -- Change to the directory of the current file
   vim.cmd('cd ' .. file_dir)
+end
 
+-- jiawzhang: type :Gt 'any comments' to submit changes
+vim.api.nvim_create_user_command('Gt', function(input)
+  cd_pwd()
   -- Run the git commit command with the provided message
   vim.cmd('!git commit -a -m ' .. input.args)
 
@@ -225,47 +230,45 @@ end, {
   nargs = 1, -- This command requires one argument
   desc = 'Perform git commit on the current repository with a message', -- Description for :help
 })
+
 -- jiawzhang: type :Gs for :!git status
 vim.api.nvim_create_user_command('Gs', function()
-  -- Get the current file's directory
-  local file_dir = vim.fn.expand '%:p:h'
-
-  -- Change to the directory of the current file
-  vim.cmd('cd ' .. file_dir)
-
+  cd_pwd()
   -- Run the git commit command with the provided message
   vim.cmd '!git status'
 end, {
   nargs = 0, -- This command requires no argument
   desc = 'Perform git status on the current repository with a message', -- Description for :help
 })
+
 -- jiawzhang: type :Gh for :!git push
 vim.api.nvim_create_user_command('Gh', function()
-  -- Get the current file's directory
-  local file_dir = vim.fn.expand '%:p:h'
-
-  -- Change to the directory of the current file
-  vim.cmd('cd ' .. file_dir)
-
+  cd_pwd()
   -- Run the git commit command with the provided message
   vim.cmd '!git push'
 end, {
   nargs = 0, -- This command requires no argument
   desc = 'Perform git status on the current repository with a message', -- Description for :help
 })
+
 -- jiawzhang: type :Gl for :!git push
 vim.api.nvim_create_user_command('Gl', function()
-  -- Get the current file's directory
-  local file_dir = vim.fn.expand '%:p:h'
-
-  -- Change to the directory of the current file
-  vim.cmd('cd ' .. file_dir)
-
+  cd_pwd()
   -- Run the git commit command with the provided message
   vim.cmd '!git pull'
 end, {
   nargs = 0, -- This command requires no argument
   desc = 'Perform git pull on the current repository with a message', -- Description for :help
+})
+
+-- jiawzhang: type :Gf for :!git diff
+vim.api.nvim_create_user_command('Gf', function()
+  cd_pwd()
+  -- Run the git commit command with the provided message
+  vim.cmd '!git diff'
+end, {
+  nargs = 0, -- This command requires no argument
+  desc = 'Perform git diff on the current repository with a message', -- Description for :help
 })
 
 -- [[ Basic Autocommands ]]
