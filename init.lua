@@ -202,6 +202,9 @@ vim.cmd 'set tabstop=2'
 vim.cmd 'set softtabstop=2'
 vim.cmd 'set shiftwidth=2'
 
+-- jiawzhang add to swich working directory to current file location.
+vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>:pwd<CR>', { desc = 'Set file location as working directory', noremap = true, silent = true })
+
 -- jiawzhang added to open terminal in a seprate view
 vim.api.nvim_create_user_command('Vspt', 'vsplit | terminal', {})
 vim.api.nvim_create_user_command('Spt', 'split | terminal', {})
