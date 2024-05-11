@@ -218,7 +218,7 @@ local cd_pwd = function()
   vim.cmd('cd ' .. file_dir)
 end
 
--- jiawzhang: type :Gt 'any comments' to submit changes
+-- jiawzhang: type :Gt 'any comments' to commi[t] changes
 vim.api.nvim_create_user_command('Gt', function(input)
   cd_pwd()
   -- Run the git commit command with the provided message
@@ -228,7 +228,7 @@ vim.api.nvim_create_user_command('Gt', function(input)
   -- vim.cmd('cd -')
 end, {
   nargs = 1, -- This command requires one argument
-  desc = 'Perform git commit on the current repository with a message', -- Description for :help
+  desc = 'Perform git commi[t] on the current repository with a message', -- Description for :help
 })
 
 -- jiawzhang: type :Gs for :!git status
@@ -238,7 +238,7 @@ vim.api.nvim_create_user_command('Gs', function()
   vim.cmd '!git status'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git status on the current repository with a message', -- Description for :help
+  desc = 'Perform git statu[s] on the current repository with a message', -- Description for :help
 })
 
 -- jiawzhang: type :Gh for :!git push
@@ -248,7 +248,7 @@ vim.api.nvim_create_user_command('Gh', function()
   vim.cmd '!git push'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git status on the current repository with a message', -- Description for :help
+  desc = 'Perform git pus[h] on the current repository with a message', -- Description for :help
 })
 
 -- jiawzhang: type :Gl for :!git push
@@ -258,7 +258,7 @@ vim.api.nvim_create_user_command('Gl', function()
   vim.cmd '!git pull'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git pull on the current repository with a message', -- Description for :help
+  desc = 'Perform git pul[l] on the current repository with a message', -- Description for :help
 })
 
 -- jiawzhang: type :Gf for :!git diff
@@ -268,7 +268,7 @@ vim.api.nvim_create_user_command('Gf', function()
   vim.cmd '!git diff'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git diff on the current repository with a message', -- Description for :help
+  desc = 'Perform git dif[f] on the current repository with a message', -- Description for :help
 })
 
 -- [[ Basic Autocommands ]]
