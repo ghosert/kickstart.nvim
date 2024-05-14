@@ -1143,7 +1143,7 @@ require('lazy').setup({
       require('chatgpt').setup {
         api_key_cmd = nil,
         openai_params = {
-          model = 'gpt-4-turbo', -- NOTE: jiawzhang: replace gpt-4turbo if newer model comes.
+          model = 'gpt-4o', -- NOTE: jiawzhang: replace 'gpt-4o' if newer model comes, pricing: https://openai.com/api/pricing/
           frequency_penalty = 0,
           presence_penalty = 0,
           max_tokens = 1000,
@@ -1152,13 +1152,17 @@ require('lazy').setup({
           n = 1,
         },
         openai_edit_params = {
-          model = 'gpt-4-turbo', -- NOTE: jiawzhang: replace gpt-4turbo if newer model comes.
+          model = 'gpt-4o', -- NOTE: jiawzhang: replace 'gpt-4o' if newer model comes.
           frequency_penalty = 0,
           presence_penalty = 0,
           temperature = 0,
           top_p = 1,
           n = 1,
         },
+        -- NOTE: jiawzhang: replace 'gpt-4o' inside ./chatgpt-actions.json if newer model comes.
+        -- NOTE: jiawzhang: this file below is coming from ~/.local/share/nvim/lazy/ChatGPT.nvim/lua/chatgpt/flows/actions/actions.json, i'm using ./chatgpt-actions.json to replace actions.json since ./chatgpt-actions.json has the latest model, you can diff actions.json and ./chatgpt-actions.json and see the difference.
+        -- NOTE: jiawzhang: if https://github.com/jackMort/ChatGPT.nvim/ got updated, please check diff and upgrade this ./chatgpt-actions.json as well.
+        actions_paths = './chatgpt-actions.json',
       }
 
       -- jiawzhang, chatgpt shortcuts: <leader>C + c/e/g etc..
