@@ -1093,6 +1093,7 @@ require('lazy').setup({
           dashboard.button('d', 'dev Dockerfile', ':e ~/docker/Dockerfile <CR>'),
           dashboard.button('s', 'dev docker script', ':e ~/docker/docker.sh <CR>'),
           dashboard.button('n', 'nvim init.lua', ':e ~/.config/nvim/init.lua <CR>'),
+          dashboard.button('N', 'nvim tips', ':e ~/VimProject/neovim.md <CR>'),
           dashboard.button('p', '.p10k.zsh', ':e ~/.p10k.zsh <CR>'),
           dashboard.button('t', '.tmux.conf', ':e ~/.tmux.conf <CR>'),
           dashboard.button('z', '.zshrc', ':e ~/.zshrc <CR>'),
