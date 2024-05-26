@@ -1200,7 +1200,8 @@ require('lazy').setup({
     vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>'),
     vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>'),
   },
-  { -- jiawzhang: add for leap.nvim, 's' to search forward, 'S' to search backward, 'gs' to search splitted view. {c1}{c2} + highlighted key to jump
+  { -- jiawzhang: add for leap.nvim, 's' to search forward, 'S' to search backward, 'gs' to search splitted view.
+    -- jiawzhang: leap.nvim: {c1}{c2} + highlighted key to jump, 's' + last letter of a word + SPACE to jump to before that space
     'ggandor/leap.nvim',
     config = function()
       local leap = require 'leap'
