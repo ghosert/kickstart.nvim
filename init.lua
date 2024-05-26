@@ -1200,6 +1200,14 @@ require('lazy').setup({
     vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>'),
     vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>'),
   },
+  { -- jiawzhang: add for leap.nvim, 's' to search forward, 'S' to search backward, 'gs' to search splitted view. {c1}{c2} + highlighted key to jump
+    'ggandor/leap.nvim',
+    config = function()
+      local leap = require 'leap'
+      leap.add_default_mappings()
+      -- leap.opts.case_sensitive = true
+    end,
+  },
 
   -- TODO:jiawzhang
   -- COC neovim LSP plugins, check the saved list below:
