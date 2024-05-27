@@ -684,7 +684,9 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {}, -- jiawzhang TODO: uncomment this to enable python LSP
+        pyright = { -- jiawzhang: enable python LSP
+          on_attach = lsp_signature_on_attach,
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
