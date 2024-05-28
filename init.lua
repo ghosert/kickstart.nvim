@@ -684,9 +684,9 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = { -- jiawzhang: enable python LSP
-          on_attach = lsp_signature_on_attach,
-        },
+        -- pyright = { -- TODO: jiawzhang python: enable python LSP, support only python3 not python2.7
+        -- on_attach = lsp_signature_on_attach,
+        -- },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -752,6 +752,7 @@ require('lazy').setup({
         'prettierd', -- jiawzhang add for javascript formatter
         'prettier', -- jiawzhang add for javascript formatter
         'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below, and go to that lint.lua to config linter.), 'tsserver' works together as well, but 'quick-lint-js' provide more error check like undefined variables, details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
+        --'black', 'isort', -- TODO: jiawzhang python: this install will fail untill you do this first: sudo apt install python3.10-venv
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -798,7 +799,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        -- python = { "isort", "black" }, -- TODO: jiawzhang python: try this later when migrating to python3
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
