@@ -1251,7 +1251,7 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
-  -- TODO: jiawzhang python: add coc-python for python2.7, remove this and switch it to pyright after migrating to python3
+  -- TODO: jiawzhang python: add coc-python for python2.7 and python3, remove this and switch it to pyright after migrating to python3
   -- NOTE: jiawzhang python: ~/productproject/devenv.tar.gz/pyvenv.cfg, make sure its 'include-system-site-packages=true' to make coc-python work
   -- NOTE: jiawzhang python: preinstalled `pip install jedi` to ~/devenv to make coc-python work
   -- NOTE: jiawzhang python: ./coc-settings.json specified virtual python we are going to use which is ~/devenv/ in this case
