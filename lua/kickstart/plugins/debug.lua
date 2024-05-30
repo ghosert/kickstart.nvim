@@ -33,6 +33,14 @@ return {
       -- After install, build it and rename the dist directory to out
       build = 'npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out',
     },
+    {
+      'mfussenegger/nvim-dap-python', -- jiawzhang add for python debug, relying on 'pip2 install debugpy' under virtual env ~/devenv, preinstalled.
+      ft = 'python',
+      config = function()
+        local path = '~/devenv/bin/python' -- NOTE: jiawzhang python: set virtual python env when debugging
+        require('dap-python').setup(path)
+      end,
+    },
   },
   config = function()
     local dap = require 'dap'
