@@ -1,6 +1,6 @@
-def test(s):
+def hello_world(s):
     print 'Hello ' + s + ' !'
 
-test('World')
+hello_world('World')
 
 print 'hello'
