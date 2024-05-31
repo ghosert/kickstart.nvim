@@ -60,10 +60,14 @@ return {
       keyset('n', ']g', '<Plug>(coc-diagnostic-next)', { silent = true })
 
       -- GoTo code navigation
-      keyset('n', 'gd', '<Plug>(coc-definition)', { silent = true })
+      -- NOTE: add :w<CR> to resolve jedi bug: https://github.com/neoclide/coc-python/issues/200
+      -- keyset('n', 'gd', '<Plug>(coc-definition)', { silent = true })
+      keyset('n', 'gd', ':w<CR><Plug>(coc-definition)', { silent = true })
       keyset('n', 'gy', '<Plug>(coc-type-definition)', { silent = true })
       keyset('n', 'gi', '<Plug>(coc-implementation)', { silent = true })
-      keyset('n', 'gr', '<Plug>(coc-references)', { silent = true })
+      -- NOTE: add :w<CR> to resolve jedi bug: https://github.com/neoclide/coc-python/issues/200
+      -- keyset('n', 'gr', '<Plug>(coc-references)', { silent = true })
+      keyset('n', 'gr', ':w<CR><Plug>(coc-references)', { silent = true })
 
       -- Use K to show documentation in preview window
       function _G.show_docs()
@@ -76,7 +80,9 @@ return {
           vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
         end
       end
-      keyset('n', 'K', '<CMD>lua _G.show_docs()<CR>', { silent = true })
+      -- NOTE: add :w<CR> to resolve jedi bug: https://github.com/neoclide/coc-python/issues/200
+      -- keyset('n', 'K', '<CMD>lua _G.show_docs()<CR>', { silent = true })
+      keyset('n', 'K', ':w<CR><CMD>lua _G.show_docs()<CR>', { silent = true })
 
       -- Highlight the symbol and its references on a CursorHold event(cursor is idle)
       vim.api.nvim_create_augroup('CocGroup', {})
