@@ -1,6 +1,7 @@
 return {
   {
     'neoclide/coc.nvim',
+    ft = 'python',
     branch = 'release',
     config = function()
       -- Autocommand to auto-install coc-python on Neovim start
@@ -189,6 +190,23 @@ return {
           keyset('n', '<space>k', ':<C-u>CocPrev<cr>', opts)
           -- Resume latest coc list
           keyset('n', '<space>p', ':<C-u>CocListResume<cr>', opts)
+
+          -- jiawzhang: disable coc if it's not python, otherwise enable it for python file.
+          local cmp = require 'cmp'
+          vim.api.nvim_create_autocmd('BufEnter', {
+            pattern = '*',
+            callback = function()
+              if vim.bo.filetype == 'python' then
+                vim.b.coc_enabled = 1
+                cmp.setup.filetype('python', {
+                  sources = cmp.config.sources {},
+                })
+              else
+                vim.b.coc_enabled = 0
+                cmp.setup.filetype('python', {})
+              end
+            end,
+          })
         end,
       })
     end,

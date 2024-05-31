@@ -899,18 +899,13 @@ require('lazy').setup({
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       }
 
-      local cmp_sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
-      }
-
       -- TODO: jiawzhang python: disable conflicts with coc-python, remove this if for python after migrating to python3 and pyright
       if vim.bo.filetype == 'python' then
         cmp_mapping['<C-Space>'] = nil
-        cmp_sources = {}
       end
 
+      -- NOTE: jiawzhang: sources can be reset based by file type.
+      -- cmp.setup.filetype('python', {sources = ...})
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -924,7 +919,11 @@ require('lazy').setup({
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert(cmp_mapping),
-        sources = cmp_sources,
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'path' },
+        },
       }
     end,
   },
