@@ -899,11 +899,6 @@ require('lazy').setup({
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       }
 
-      -- TODO: jiawzhang python: disable conflicts with coc-python, remove this if for python after migrating to python3 and pyright
-      if vim.bo.filetype == 'python' then
-        cmp_mapping['<C-Space>'] = nil
-      end
-
       -- NOTE: jiawzhang: sources can be reset based by file type.
       -- cmp.setup.filetype('python', {sources = ...})
       cmp.setup {
@@ -1254,6 +1249,7 @@ require('lazy').setup({
   -- NOTE: jiawzhang python: ~/productproject/devenv.tar.gz/pyvenv.cfg, make sure its 'include-system-site-packages=true' to make coc-python work
   -- NOTE: jiawzhang python: preinstalled `pip install jedi` to ~/devenv to make coc-python work
   -- NOTE: jiawzhang python: ./coc-settings.json specified virtual python we are going to use which is ~/devenv/ in this case
+  -- NOTE: jiawzhang python: inside this plugin, i'm using 'CTRL + J' instead of 'CTRL + SPACE' for auto completion otherwise conflicts with nvim-cmp
   { import = 'custom.plugins.coc' },
 }, {
   ui = {
