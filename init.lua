@@ -504,6 +504,18 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'mfussenegger/nvim-jdtls',
+    ft = 'java',
+    config = function()
+      local config = {
+        cmd = { vim.fn.expand '~/.local/share/nvim/mason/bin/jdtls' },
+        root_idr = vim.fs.dirname(vim.fs.find({ 'gradle', '.git', 'mvnw' }, { upward = true })[1]),
+      }
+      require('jdtls').start_or_attach(config)
+    end,
+  },
+
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -687,6 +699,7 @@ require('lazy').setup({
         -- pyright = { -- TODO: jiawzhang python: enable python LSP, support only python3 not python2.7
         -- on_attach = lsp_signature_on_attach,
         -- },
+        jdtls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
