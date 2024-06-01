@@ -1222,13 +1222,15 @@ require('lazy').setup({
     vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>'),
     vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>'),
   },
-  { -- jiawzhang: add for leap.nvim, 's' to search forward, 'S' to search backward, 'gs' to search splitted view.
-    -- jiawzhang: leap.nvim: {c1}{c2} + highlighted key to jump, 's' + last letter of a word + SPACE to jump to before that space
+  { -- jiawzhang: add for leap.nvim, 'f' to search forward, 'F' to search backward, 'gs' to search splitted view.
+    -- jiawzhang: leap.nvim: {c1}{c2} + highlighted key to jump, 'f' + last letter of a word + SPACE to jump to before that space
     'ggandor/leap.nvim',
     config = function()
-      local leap = require 'leap'
-      leap.add_default_mappings()
-      -- leap.opts.case_sensitive = true
+      -- jiawzhang: default s/S has conflicts with mini.nvim, so re-map them to f/F as below
+      vim.keymap.set({ 'n', 'x', 'o' }, 'f', '<Plug>(leap-forward)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 'F', '<Plug>(leap-backward)')
+      vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
+      -- require('leap').opts.case_sensitive = true
     end,
   },
 
