@@ -699,7 +699,9 @@ require('lazy').setup({
         -- pyright = { -- TODO: jiawzhang python: enable python LSP, support only python3 not python2.7
         -- on_attach = lsp_signature_on_attach,
         -- },
-        jdtls = {},
+        jdtls = {
+          on_attach = lsp_signature_on_attach,
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
