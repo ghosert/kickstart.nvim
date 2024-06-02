@@ -1222,16 +1222,22 @@ require('lazy').setup({
     vim.keymap.set('n', '<C-k>', ':TmuxNavigateUp<CR>'),
     vim.keymap.set('n', '<C-l>', ':TmuxNavigateRight<CR>'),
   },
-  { -- jiawzhang: add for leap.nvim, 'f' to search forward, 'F' to search backward, 'gs' to search splitted view.
-    -- jiawzhang: leap.nvim: {c1}{c2} + highlighted key to jump, 'f' + last letter of a word + SPACE to jump to before that space
-    'ggandor/leap.nvim',
-    config = function()
-      -- jiawzhang: default s/S has conflicts with mini.nvim, so re-map them to f/F as below
-      vim.keymap.set({ 'n', 'x', 'o' }, 'f', '<Plug>(leap-forward)')
-      vim.keymap.set({ 'n', 'x', 'o' }, 'F', '<Plug>(leap-backward)')
-      vim.keymap.set({ 'n', 'x', 'o' }, 'gs', '<Plug>(leap-from-window)')
-      -- require('leap').opts.case_sensitive = true
-    end,
+  { -- NOTE: jiawzhang: enahnced f, F, t, T for search across lines and keep typing f/F/t/T for next selection if multiple.
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    ----@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      -- NOTE: jiawzhang: use gs + keyword to jump, S to select only for blocks,
+      { "gs", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      -- NOTE: jiawzhang: type y and then r or R and search keyword and y again to copy, going with r will return cursor to original position, R wil not.
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      -- NOTE: jiawzhang: type / for search then type ctrl-s to apply flash.nvim search pattern in vim traditional search.
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
   },
 
   -- TODO:jiawzhang
