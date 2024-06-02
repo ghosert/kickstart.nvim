@@ -48,6 +48,8 @@ Kickstart Guide:
   NOTE: jiawzhang nvim setup: https://www.youtube.com/watch?v=m8C0Cq9Uv9o
   NOTE: jiawzhang nvim setup: https://www.youtube.com/watch?v=S-xzYgTLVJE&list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&index=3
 
+  NOTE: :Lazy for lazy installed plugin :Mason for mason installed plugin :LspInfo for installed lsp, :checkhealth for conflicts check or key binding conflicts
+
     If you don't know what this means, type the following:
       - <escape key>
       - :
