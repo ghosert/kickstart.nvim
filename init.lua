@@ -220,8 +220,8 @@ local cd_pwd = function()
   vim.cmd('cd ' .. file_dir)
 end
 
--- jiawzhang: type :Gt 'any comments' to commi[t] changes
-vim.api.nvim_create_user_command('Gt', function(input)
+-- jiawzhang: type :Gc 'any comments' to commi[t] changes
+vim.api.nvim_create_user_command('Gc', function(input)
   cd_pwd()
   -- Run the git commit command with the provided message
   vim.cmd('!git commit -a -m ' .. input.args)
@@ -230,33 +230,33 @@ vim.api.nvim_create_user_command('Gt', function(input)
   -- vim.cmd('cd -')
 end, {
   nargs = 1, -- This command requires one argument
-  desc = 'Perform git commi[t] on the current repository with a message', -- Description for :help
+  desc = 'Perform git [c]ommit on the current repository with a message', -- Description for :help
 })
 
--- jiawzhang: type :Gs for :!git status
-vim.api.nvim_create_user_command('Gs', function()
+-- jiawzhang: type :Gst for :!git status
+vim.api.nvim_create_user_command('Gst', function()
   cd_pwd()
-  -- Run the git commit command with the provided message
+  -- Run the git status command
   vim.cmd '!git status'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git statu[s] on the current repository with a message', -- Description for :help
+  desc = 'Perform git [st]atus on the current repository with a message', -- Description for :help
 })
 
--- jiawzhang: type :Gh for :!git push
-vim.api.nvim_create_user_command('Gh', function()
+-- jiawzhang: type :Gp for :!git push
+vim.api.nvim_create_user_command('Gp', function()
   cd_pwd()
-  -- Run the git commit command with the provided message
+  -- Run the git push command
   vim.cmd '!git push'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git pus[h] on the current repository with a message', -- Description for :help
+  desc = 'Perform git [p]ush on the current repository with a message', -- Description for :help
 })
 
--- jiawzhang: type :Gl for :!git push
+-- jiawzhang: type :Gl for :!git pull
 vim.api.nvim_create_user_command('Gl', function()
   cd_pwd()
-  -- Run the git commit command with the provided message
+  -- Run the git pull command
   vim.cmd '!git pull'
 end, {
   nargs = 0, -- This command requires no argument
@@ -264,13 +264,13 @@ end, {
 })
 
 -- jiawzhang: type :Gf for :!git diff
-vim.api.nvim_create_user_command('Gf', function()
+vim.api.nvim_create_user_command('Gd', function()
   cd_pwd()
-  -- Run the git commit command with the provided message
+  -- Run the git diff command
   vim.cmd '!git diff'
 end, {
   nargs = 0, -- This command requires no argument
-  desc = 'Perform git dif[f] on the current repository with a message', -- Description for :help
+  desc = 'Perform git [d]iff on the current repository with a message', -- Description for :help
 })
 
 -- [[ Basic Autocommands ]]
