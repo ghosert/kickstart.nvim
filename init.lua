@@ -505,19 +505,10 @@ require('lazy').setup({
       end, { desc = '[S]earch [N]eovim files' })
     end,
   },
-
-  {
+  { -- jiawzhang add for java, plugin config is in ~/.config/nvim/ftplugin/java.lua
     'mfussenegger/nvim-jdtls',
     ft = 'java',
-    config = function()
-      local config = {
-        cmd = { vim.fn.expand '~/.local/share/nvim/mason/bin/jdtls' },
-        root_dir = vim.fs.dirname(vim.fs.find({ 'gradle', '.git', 'gradlew', 'build.gradle', 'mvnw' }, { upward = true })[1]),
-      }
-      require('jdtls').start_or_attach(config)
-    end,
   },
-
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -662,7 +653,7 @@ require('lazy').setup({
 
       -- NOTE: jiawzhang: when typing method signature, show help if the  plugin doesn't support it like tsserver lsp for javascript. https://github.com/ray-x/lsp_signature.nvim
       -- NOTE: jiawzhang: Add this to any local lsp below like tsserver if you want to have this feature applied to that lsp.
-      local lsp_signature_on_attach = function(client, bufnr)
+      lsp_signature_on_attach = function(client, bufnr)
         -- Enable signature help
         require('lsp_signature').on_attach({
           bind = true,
@@ -701,8 +692,7 @@ require('lazy').setup({
         -- pyright = { -- TODO: jiawzhang python: enable python LSP, support only python3 not python2.7
         -- on_attach = lsp_signature_on_attach,
         -- },
-        jdtls = {
-          on_attach = lsp_signature_on_attach,
+        jdtls = { -- jiawzhang java: add for java
         },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -770,6 +760,8 @@ require('lazy').setup({
         'prettier', -- jiawzhang add for javascript formatter
         'quick-lint-js', -- jiawzhang add for javascript linter(uncommented "require 'kickstart.plugins.lint'" below, and go to that lint.lua to config linter.), 'tsserver' works together as well, but 'quick-lint-js' provide more error check like undefined variables, details https://quick-lint-js.com/blog/why-another-javascript-linter/#future-of-javascript-linters
         --'black', 'isort', -- TODO: jiawzhang python: this install will fail untill you do this first: sudo apt install python3.10-venv
+        'java-test',
+        'java-debug-adapter',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -780,8 +772,10 @@ require('lazy').setup({
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            if server_name ~= 'jdtls' then -- skip for jdtls, since it has its own configuration
+              server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+              require('lspconfig')[server_name].setup(server)
+            end
           end,
         },
       }
