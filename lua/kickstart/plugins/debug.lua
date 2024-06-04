@@ -104,6 +104,26 @@ return {
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
 
+    -- TODO: jiawzhang: Debugging feature key bindings, try them later.
+    -- keymap.set("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+    -- keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
+    -- keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
+    -- keymap.set("n", '<leader>br', "<cmd>lua require'dap'.clear_breakpoints()<cr>")
+    -- keymap.set("n", '<leader>ba', '<cmd>Telescope dap list_breakpoints<cr>')
+    -- keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>")
+    -- keymap.set("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>")
+    -- keymap.set("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>")
+    -- keymap.set("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>")
+    -- keymap.set("n", '<leader>dd', function() require('dap').disconnect(); require('dapui').close(); end)
+    -- keymap.set("n", '<leader>dt', function() require('dap').terminate(); require('dapui').close(); end)
+    -- keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>")
+    -- keymap.set("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>")
+    -- keymap.set("n", '<leader>di', function() require "dap.ui.widgets".hover() end)
+    -- keymap.set("n", '<leader>d?', function() local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes) end)
+    -- keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
+    -- keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')
+    -- keymap.set("n", '<leader>de', function() require('telescope.builtin').diagnostics({default_text=":E:"}) end)
+
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
@@ -133,7 +153,51 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
+    -- Add dap configurations based on your language/adapter settings
+    -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+    dap.configurations.java = {
+      {
+        name = 'Debug Launch (2GB)',
+        type = 'java',
+        request = 'launch',
+        vmArgs = '' .. '-Xmx2g ',
+      },
+      {
+        name = 'Debug Attach (8000)',
+        type = 'java',
+        request = 'attach',
+        hostName = '127.0.0.1',
+        port = 8000,
+      },
+      {
+        name = 'Debug Attach (5005)',
+        type = 'java',
+        request = 'attach',
+        hostName = '127.0.0.1',
+        port = 5005,
+      },
+      {
+        name = 'My Custom Java Run Configuration',
+        type = 'java',
+        request = 'launch',
+        -- You need to extend the classPath to list your dependencies.
+        -- `nvim-jdtls` would automatically add the `classPaths` property if it is missing
+        -- classPaths = {},
+
+        -- If using multi-module projects, remove otherwise.
+        -- projectName = "yourProjectName",
+
+        -- javaExec = "java",
+        mainClass = 'replace.with.your.fully.qualified.MainClass',
+
+        -- If using the JDK9+ module system, this needs to be extended
+        -- `nvim-jdtls` would automatically populate this property
+        -- modulePaths = {},
+        vmArgs = '' .. '-Xmx2g ',
+      },
+    }
+
     -- Install golang specific config
-    -- require('dap-go').setup() -- jiawzhang comment it out since we don't have go language here.
+    -- require('dap-go').setup() -- jiawzhang comment it out since we don't have go language here and maybe move it to above like python and js
   end,
 }

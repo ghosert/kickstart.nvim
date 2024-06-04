@@ -1,7 +1,33 @@
--- TODO: jiawzhang
--- finish the other things like debug etc...
--- try all these again in macos
--- Check these links on how to setup java jdtls in neovim
+-- TODO: jiawzhang: java
+-- Unit testing and its shortcut, watch later here: https://youtu.be/TryxysOh-fI?t=585
+--
+-- -- Filetype-specific keymaps (these can be done in the ftplugin directory instead if you prefer)
+--
+-- keymap.set("n", '<leader>go', function()
+--   if vim.bo.filetype == 'java' then
+--     require('jdtls').organize_imports();
+--   end
+-- end)
+--
+-- keymap.set("n", '<leader>gu', function()
+--   if vim.bo.filetype == 'java' then
+--     require('jdtls').update_projects_config();
+--   end
+-- end)
+--
+-- keymap.set("n", '<leader>tc', function()
+--   if vim.bo.filetype == 'java' then
+--     require('jdtls').test_class();
+--   end
+-- end)
+--
+-- keymap.set("n", '<leader>tm', function()
+--   if vim.bo.filetype == 'java' then
+--     require('jdtls').test_nearest_method();
+--   end
+-- end)
+--
+-- NOTE: jiawzhang: java
 -- https://www.youtube.com/watch?v=TryxysOh-fI
 -- https://github.com/bcampolo/nvim-starter-kit/blob/java/.config/nvim/ftplugin/java.lua
 -- https://github.com/mfussenegger/nvim-jdtls
