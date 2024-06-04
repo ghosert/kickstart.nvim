@@ -64,6 +64,19 @@ local cpu = (function()
   return ''
 end)()
 
+local java_path = (function()
+    if system == 'mac' then
+        return '/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home'
+    end
+    if system == 'linux' then
+        if cpu == 'arm' then
+            return '/usr/lib/jvm/java-17-openjdk-arm64'
+        else
+            return '/usr/lib/jvm/java-17-openjdk-amd64'
+        end
+    end
+end)()
+
 local config_postfix = (function()
   if cpu == '' then
     return system
@@ -117,7 +130,7 @@ local config = {
   settings = {
     java = {
       -- TODO Replace this with the absolute path to your main java version (JDK 17 or higher)
-      home = '/usr/lib/jvm/java-17-openjdk-amd64',
+      home = java_path,
       eclipse = {
         downloadSources = true,
       },
@@ -128,7 +141,7 @@ local config = {
         runtimes = {
           {
             name = 'JavaSE-17',
-            path = '/usr/lib/jvm/java-17-openjdk-amd64',
+            path = java_path,
           },
         },
       },
