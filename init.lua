@@ -199,10 +199,10 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- jiawzhang set 2 spaces for tab in any case
-vim.cmd 'set expandtab'
-vim.cmd 'set tabstop=2'
-vim.cmd 'set softtabstop=2'
-vim.cmd 'set shiftwidth=2'
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
 
 -- jiawzhang add to swich working directory to current file location.
 vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>:pwd<CR>', { desc = 'Set file location as working directory', noremap = true, silent = true })
