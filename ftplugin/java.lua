@@ -65,16 +65,16 @@ local cpu = (function()
 end)()
 
 local java_path = (function()
-    if system == 'mac' then
-        return '/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home'
+  if system == 'mac' then
+    return '/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home'
+  end
+  if system == 'linux' then
+    if cpu == 'arm' then
+      return '/usr/lib/jvm/java-17-openjdk-arm64'
+    else
+      return '/usr/lib/jvm/java-17-openjdk-amd64'
     end
-    if system == 'linux' then
-        if cpu == 'arm' then
-            return '/usr/lib/jvm/java-17-openjdk-arm64'
-        else
-            return '/usr/lib/jvm/java-17-openjdk-amd64'
-        end
-    end
+  end
 end)()
 
 local config_postfix = (function()
@@ -159,7 +159,7 @@ local config = {
       },
       signatureHelp = { enabled = true },
       format = {
-        enabled = true,
+        enabled = false, -- jiawzhang java: disable this first for existing projects.
         -- Formatting works by default, but you can refer to a specific file/URL if you choose
         -- settings = {
         --   url = "https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml",
