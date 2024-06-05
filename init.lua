@@ -1238,10 +1238,7 @@ require('lazy').setup({
   },
 
   -- TODO:jiawzhang
-  -- COC neovim LSP plugins, check the saved list below:
-  -- https://www.youtube.com/playlist?list=PLkX2COZxBVRB-rElIpog6nYDPJBnHYJxq
-  -- Install LSP/DAP/LINTER/FORMATTER for javascript, python, java, (html, css, json, markdown, vscode-langservers-extracted):
-  -- https://www.youtube.com/watch?v=ybUE4D80XSk
+  -- Install LSP/DAP/LINTER/FORMATTER for java (html, css, json, markdown, vscode-langservers-extracted):
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
