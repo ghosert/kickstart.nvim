@@ -1238,7 +1238,7 @@ require('lazy').setup({
   },
 
   -- TODO:jiawzhang
-  -- Install LSP/DAP/LINTER/FORMATTER for java (html, css, json, markdown, vscode-langservers-extracted):
+  -- Install LSP/DAP/LINTER/FORMATTER for html, css, json, vscode-langservers-extracted:
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
