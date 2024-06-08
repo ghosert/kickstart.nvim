@@ -20,7 +20,7 @@ These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 
-### Start this application:
+### Start this application: (Run this below to make sure all the jars pulled first then open java file with neovim, otherwise missing 3rd jars)
 
 ```bash
 ./gradlew bootRun
