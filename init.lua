@@ -1263,7 +1263,7 @@ require('lazy').setup({
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
   -- TODO: jiawzhang python: add coc-python for python2.7 and python3, remove this and switch it to pyright after migrating to python3
-  -- NOTE: jiawzhang python: ~/docker/devenv.tar.gz/pyvenv.cfg, make sure its 'include-system-site-packages=true' to make coc-python work
+  -- NOTE: jiawzhang python: ~/docker/zybuluo/devenv.tar.gz/pyvenv.cfg, make sure its 'include-system-site-packages=true' to make coc-python work
   -- NOTE: jiawzhang python: preinstalled `pip install jedi` to ~/devenv to make coc-python work
   -- NOTE: jiawzhang python: ./coc-settings.json specified virtual python we are going to use which is ~/devenv/ in this case
   -- NOTE: jiawzhang python: inside this plugin, i'm using 'CTRL + J' instead of 'CTRL + SPACE' for auto completion otherwise conflicts with nvim-cmp
