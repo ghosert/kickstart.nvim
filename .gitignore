@@ -5,4 +5,3 @@ nvim
 *.pyc
 
 spell/
-lazy-lock.json
