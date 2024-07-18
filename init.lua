@@ -170,8 +170,12 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump { count = -1 }
+end, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump { count = 1 }
+end, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -363,19 +367,24 @@ require('lazy').setup({
       require('which-key').setup()
 
       -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+      require('which-key').add {
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>c_', hidden = true },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>d_', hidden = true },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>r_', hidden = true },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>s_', hidden = true },
+        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t_', hidden = true },
+        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w_', hidden = true },
       }
       -- visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
+      require('which-key').add {
+        { '<leader>h', desc = 'Git [H]unk', mode = { 'n', 'v' } },
+      }
     end,
   },
 
@@ -1188,28 +1197,29 @@ require('lazy').setup({
       }
 
       -- jiawzhang, chatgpt shortcuts: <leader>C + c/e/g etc..
-      require('which-key').register({
-        a = {
-          name = 'ChatGPT',
-          c = { '<cmd>ChatGPT<CR>', 'ChatGPT' },
-          e = { '<cmd>ChatGPTEditWithInstruction<CR>', 'Edit with instruction', mode = { 'n', 'v' } },
-          g = { '<cmd>ChatGPTRun grammar_correction<CR>', 'Grammar Correction', mode = { 'n', 'v' } },
-          t = { '<cmd>ChatGPTRun translate<CR>', 'Translate', mode = { 'n', 'v' } },
-          k = { '<cmd>ChatGPTRun keywords<CR>', 'Keywords', mode = { 'n', 'v' } },
-          d = { '<cmd>ChatGPTRun docstring<CR>', 'Docstring', mode = { 'n', 'v' } },
-          a = { '<cmd>ChatGPTRun add_tests<CR>', 'Add Tests', mode = { 'n', 'v' } },
-          o = { '<cmd>ChatGPTRun optimize_code<CR>', 'Optimize Code', mode = { 'n', 'v' } },
-          s = { '<cmd>ChatGPTRun summarize<CR>', 'Summarize', mode = { 'n', 'v' } },
-          f = { '<cmd>ChatGPTRun fix_bugs<CR>', 'Fix Bugs', mode = { 'n', 'v' } },
-          x = { '<cmd>ChatGPTRun explain_code<CR>', 'Explain Code', mode = { 'n', 'v' } },
-          r = { '<cmd>ChatGPTRun roxygen_edit<CR>', 'Roxygen Edit', mode = { 'n', 'v' } },
-          l = { '<cmd>ChatGPTRun code_readability_analysis<CR>', 'Code Readability Analysis', mode = { 'n', 'v' } },
+      require('which-key').add {
+        { '<leader>a', group = 'ChatGPT' },
+        { '<leader>ac', '<cmd>ChatGPT<CR>', desc = 'ChatGPT' },
+        {
+          mode = { 'n', 'v' },
+          { '<leader>aa', '<cmd>ChatGPTRun add_tests<CR>', desc = 'Add Tests' },
+          { '<leader>ad', '<cmd>ChatGPTRun docstring<CR>', desc = 'Docstring' },
+          { '<leader>ae', '<cmd>ChatGPTEditWithInstruction<CR>', desc = 'Edit with instruction' },
+          { '<leader>af', '<cmd>ChatGPTRun fix_bugs<CR>', desc = 'Fix Bugs' },
+          { '<leader>ag', '<cmd>ChatGPTRun grammar_correction<CR>', desc = 'Grammar Correction' },
+          { '<leader>ak', '<cmd>ChatGPTRun keywords<CR>', desc = 'Keywords' },
+          { '<leader>al', '<cmd>ChatGPTRun code_readability_analysis<CR>', desc = 'Code Readability Analysis' },
+          { '<leader>ao', '<cmd>ChatGPTRun optimize_code<CR>', desc = 'Optimize Code' },
+          { '<leader>ar', '<cmd>ChatGPTRun roxygen_edit<CR>', desc = 'Roxygen Edit' },
+          { '<leader>as', '<cmd>ChatGPTRun summarize<CR>', desc = 'Summarize' },
+          { '<leader>at', '<cmd>ChatGPTRun translate<CR>', desc = 'Translate' },
+          { '<leader>ax', '<cmd>ChatGPTRun explain_code<CR>', desc = 'Explain Code' },
           -- shortcuts added by jiawzhang
-          A = { '<cmd>ChatGPTActAs<CR>', 'Act As ...', mode = { 'n', 'v' } },
-          m = { '<cmd>ChatGPTCompleteCode<CR>', 'Complete Code', mode = { 'n', 'v' } },
-          h = { '<cmd>help ChatGPT<CR>', 'Help Doc on ChatGPT', mode = { 'n', 'v' } },
+          { '<leader>aA', '<cmd>ChatGPTActAs<CR>', desc = 'Act As ...' },
+          { '<leader>am', '<cmd>ChatGPTCompleteCode<CR>', desc = 'Complete Code' },
+          { '<leader>ah', '<cmd>help ChatGPT<CR>', desc = 'Help Doc on ChatGPT' },
         },
-      }, { prefix = '<leader>' })
+      }
     end,
   },
   { -- jiawzhang, add for use ctrl + hjkl to move focus from neovim to another tmux window.
