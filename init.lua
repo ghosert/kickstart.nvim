@@ -534,7 +534,7 @@ require('lazy').setup({
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
 
-      -- NOTE: jiawzhang add for method signature help when typing signature for the plugin doesn't support it like tsserver javascript/typescript
+      -- NOTE: jiawzhang add for method signature help when typing signature for the plugin doesn't support it like ts_ls(tsserver) javascript/typescript
       {
         'ray-x/lsp_signature.nvim',
         event = 'VeryLazy',
@@ -660,8 +660,8 @@ require('lazy').setup({
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-      -- NOTE: jiawzhang: when typing method signature, show help if the  plugin doesn't support it like tsserver lsp for javascript. https://github.com/ray-x/lsp_signature.nvim
-      -- NOTE: jiawzhang: Add this to any local lsp below like tsserver if you want to have this feature applied to that lsp.
+      -- NOTE: jiawzhang: when typing method signature, show help if the  plugin doesn't support it like ts_ls(tsserver) lsp for javascript. https://github.com/ray-x/lsp_signature.nvim
+      -- NOTE: jiawzhang: Add this to any local lsp below like ts_ls(tsserver) if you want to have this feature applied to that lsp.
       lsp_signature_on_attach = function(client, bufnr)
         -- Enable signature help
         require('lsp_signature').on_attach({
@@ -709,8 +709,8 @@ require('lazy').setup({
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {
+        -- But for many setups, the LSP ts_ls(`tsserver`) will work just fine
+        ts_ls = {
           on_attach = lsp_signature_on_attach,
         }, -- jiawzhang open for typescript/javascript lsp, to check data type in javascript, create "jsconfig.json" to the root of your project with content below:
         --[[
@@ -728,7 +728,7 @@ require('lazy').setup({
         --]]
 
         -- NOTE: jiawzhang: server_configurations details can be found here:
-        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
 
         lua_ls = {
           -- cmd = {...},
