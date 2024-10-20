@@ -1255,6 +1255,7 @@ require('lazy').setup({
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
+  -- NOTE: configuration is here: ~/.config/nvim/lua/avante/config.lua, '<leader>v' to trigger avante.nvim
   {
     'yetone/avante.nvim',
     event = 'VeryLazy',
@@ -1300,7 +1301,6 @@ require('lazy').setup({
         ft = { 'markdown', 'Avante' },
       },
     },
-    -- NOTE: configuration is here: ~/.config/nvim/lua/avante/config.lua, '<leader>v' to trigger avante.nvim
   },
 
   -- TODO:jiawzhang
