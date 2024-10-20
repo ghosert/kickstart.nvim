@@ -138,7 +138,7 @@ vim.opt.updatetime = 250
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 500
 
 -- Configure how new splits should be opened
 vim.opt.splitright = true
@@ -1027,8 +1027,8 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'java', 'python', 'javascript' },
-      -- Autoinstall languages that are not installed, jiawzhang NOTE: Due to 'auto_install' below 'ensure_installed' doesn't matter
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'java', 'python', 'javascript', 'query', 'markdown_inline' },
+      -- Autoinstall languages that are not installed, jiawzhang NOTE: have to add 'query' and 'markdown_inline' otherwise :checkhealth reports errors.
       auto_install = true,
       highlight = {
         enable = true,
@@ -1293,7 +1293,7 @@ require('lazy').setup({
         },
       },
       {
-        -- Make sure to set this up properly if you have lazy=true
+        -- Make sure to set this up properly if you have lazy=true, NOTE: jiawzhang: this plugin also impacts all the markdown files like ~/VimProject/note.md
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
           file_types = { 'markdown', 'Avante' },
