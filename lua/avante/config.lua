@@ -327,6 +327,7 @@ local prefill_edit_window = function(request)
   -- Simulate Ctrl+S keypress to submit
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, true, true), 'v', true)
 end
+-- TODO: jiawzhang: learn more tips from ~/.config/nvim/chatgpt-actions.json
 --   { '<leader>ag', '<cmd>ChatGPTRun grammar_correction<CR>', desc = 'Grammar Correction' },
 --   { '<leader>ak', '<cmd>ChatGPTRun keywords<CR>', desc = 'Keywords' },
 --   { '<leader>al', '<cmd>ChatGPTRun code_readability_analysis<CR>', desc = 'Code Readability Analysis' },
