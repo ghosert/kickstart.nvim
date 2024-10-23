@@ -312,4 +312,91 @@ M.BASE_PROVIDER_KEYS = {
   'use_xml_format',
 }
 
+-- NOTE: jiawzhang: add more shortcuts to common coding scenarios to avoid typing same thing again and again
+
+local prefill_edit_window = function(request)
+  require('avante.api').edit()
+  local code_bufnr = vim.api.nvim_get_current_buf()
+  local code_winid = vim.api.nvim_get_current_win()
+  if code_bufnr == nil or code_winid == nil then
+    return
+  end
+  vim.api.nvim_buf_set_lines(code_bufnr, 0, -1, false, { request })
+  -- Optionally set the cursor position to the end of the input
+  vim.api.nvim_win_set_cursor(code_winid, { 1, #request + 1 })
+  -- Simulate Ctrl+S keypress to submit
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, true, true), 'v', true)
+end
+--   { '<leader>ag', '<cmd>ChatGPTRun grammar_correction<CR>', desc = 'Grammar Correction' },
+--   { '<leader>ak', '<cmd>ChatGPTRun keywords<CR>', desc = 'Keywords' },
+--   { '<leader>al', '<cmd>ChatGPTRun code_readability_analysis<CR>', desc = 'Code Readability Analysis' },
+--   { '<leader>ao', '<cmd>ChatGPTRun optimize_code<CR>', desc = 'Optimize Code' },
+--   { '<leader>ar', '<cmd>ChatGPTRun roxygen_edit<CR>', desc = 'Roxygen Edit' },
+--   { '<leader>as', '<cmd>ChatGPTRun summarize<CR>', desc = 'Summarize' },
+--   { '<leader>at', '<cmd>ChatGPTRun translate<CR>', desc = 'Translate' },
+--   { '<leader>ax', '<cmd>ChatGPTRun explain_code<CR>', desc = 'Explain Code' },
+--   -- shortcuts added by jiawzhang
+--   { '<leader>aA', '<cmd>ChatGPTActAs<CR>', desc = 'Act As ...' },
+--   { '<leader>am', '<cmd>ChatGPTCompleteCode<CR>', desc = 'Complete Code' },
+--   { '<leader>ah', '<cmd>help ChatGPT<CR>', desc = 'Help Doc on ChatGPT' },
+local avante_complete_code = 'Complete the following codes written in ' .. vim.bo.filetype
+local avante_add_docstring = 'Add docstring to the following codes'
+local avante_fix_bugs = 'Fix the bugs inside the following codes if any'
+require('which-key').add {
+  { '<leader>v', group = 'A[v]ante' }, -- NOTE: add for avante.nvim
+  {
+    mode = { 'n', 'v' },
+    -- { '<leader>vc', '<cmd>AvanteAsk "Complete code"<CR>', desc = 'Complete Code(ask)' },
+    {
+      '<leader>vc',
+      function()
+        require('avante.api').ask { question = avante_complete_code }
+      end,
+      desc = 'Complete Code(ask)',
+    },
+    {
+      '<leader>vd',
+      function()
+        require('avante.api').ask { question = avante_add_docstring }
+      end,
+      desc = 'Docstring(ask)',
+    },
+    {
+      '<leader>vx',
+      function()
+        require('avante.api').ask { question = avante_fix_bugs }
+      end,
+      desc = 'Fix Bugs(ask)',
+    },
+  },
+}
+
+require('which-key').add {
+  { '<leader>v', group = 'A[v]ante' }, -- NOTE: add for avante.nvim
+  {
+    mode = { 'v' },
+    {
+      '<leader>vC',
+      function()
+        prefill_edit_window(avante_complete_code)
+      end,
+      desc = 'Complete Code(edit)',
+    },
+    {
+      '<leader>vD',
+      function()
+        prefill_edit_window(avante_add_docstring)
+      end,
+      desc = 'Docstring(edit)',
+    },
+    {
+      '<leader>vX',
+      function()
+        prefill_edit_window(avante_fix_bugs)
+      end,
+      desc = 'Fix Bugs(edit)',
+    },
+  },
+}
+
 return M

@@ -384,8 +384,6 @@ require('lazy').setup({
         { '<leader>t_', hidden = true },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>w_', hidden = true },
-        { '<leader>v', group = 'A[v]ante' }, -- NOTE: add for avante.nvim
-        { '<leader>v_', hidden = true },
       }
       -- visual mode
       require('which-key').add {
