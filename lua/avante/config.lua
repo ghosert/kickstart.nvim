@@ -327,27 +327,86 @@ local prefill_edit_window = function(request)
   -- Simulate Ctrl+S keypress to submit
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, true, true), 'v', true)
 end
--- TODO: jiawzhang: learn more tips from ~/.config/nvim/chatgpt-actions.json
---   { '<leader>ag', '<cmd>ChatGPTRun grammar_correction<CR>', desc = 'Grammar Correction' },
---   { '<leader>ak', '<cmd>ChatGPTRun keywords<CR>', desc = 'Keywords' },
---   { '<leader>al', '<cmd>ChatGPTRun code_readability_analysis<CR>', desc = 'Code Readability Analysis' },
---   { '<leader>ao', '<cmd>ChatGPTRun optimize_code<CR>', desc = 'Optimize Code' },
---   { '<leader>ar', '<cmd>ChatGPTRun roxygen_edit<CR>', desc = 'Roxygen Edit' },
---   { '<leader>as', '<cmd>ChatGPTRun summarize<CR>', desc = 'Summarize' },
---   { '<leader>at', '<cmd>ChatGPTRun translate<CR>', desc = 'Translate' },
---   { '<leader>ax', '<cmd>ChatGPTRun explain_code<CR>', desc = 'Explain Code' },
---   -- shortcuts added by jiawzhang
---   { '<leader>aA', '<cmd>ChatGPTActAs<CR>', desc = 'Act As ...' },
---   { '<leader>am', '<cmd>ChatGPTCompleteCode<CR>', desc = 'Complete Code' },
---   { '<leader>ah', '<cmd>help ChatGPT<CR>', desc = 'Help Doc on ChatGPT' },
+-- NOTE: jiawzhang: most templates are inspired from ~/.config/nvim/chatgpt-actions.json
+local avante_grammar_correction = 'Correct the text to standard English, but keep any code blocks inside intact.'
+local avante_keywords = 'Extract the main keywords from the following text'
+local avante_code_readability_analysis = [[
+  You must identify any readability issues in the code snippet.
+  Some readability issues to consider:
+  - Unclear naming
+  - Unclear purpose
+  - Redundant or obvious comments
+  - Lack of comments
+  - Long or complex one liners
+  - Too much nesting
+  - Long variable names
+  - Inconsistent naming and code style.
+  - Code repetition
+  You may identify additional problems. The user submits a small section of code from a larger file.
+  Only list lines with readability issues, in the format <line_num>|<issue and proposed solution>
+  If there's no issues with code respond with only: <OK>
+]]
+local avante_optimize_code = 'Optimize the following code'
+local avante_summarize = 'Summarize the following text'
+local avante_translate = 'Translate this into Chinese, but keep any code blocks inside intact'
+local avante_explain_code = 'Explain the following code'
 local avante_complete_code = 'Complete the following codes written in ' .. vim.bo.filetype
 local avante_add_docstring = 'Add docstring to the following codes'
 local avante_fix_bugs = 'Fix the bugs inside the following codes if any'
+
 require('which-key').add {
   { '<leader>v', group = 'A[v]ante' }, -- NOTE: add for avante.nvim
   {
     mode = { 'n', 'v' },
-    -- { '<leader>vc', '<cmd>AvanteAsk "Complete code"<CR>', desc = 'Complete Code(ask)' },
+    {
+      '<leader>vg',
+      function()
+        require('avante.api').ask { question = avante_grammar_correction }
+      end,
+      desc = 'Grammar Correction(ask)',
+    },
+    {
+      '<leader>vk',
+      function()
+        require('avante.api').ask { question = avante_keywords }
+      end,
+      desc = 'Keywords(ask)',
+    },
+    {
+      '<leader>vl',
+      function()
+        require('avante.api').ask { question = avante_code_readability_analysis }
+      end,
+      desc = 'Code Readability Analysis(ask)',
+    },
+    {
+      '<leader>vo',
+      function()
+        require('avante.api').ask { question = avante_optimize_code }
+      end,
+      desc = 'Optimize Code(ask)',
+    },
+    {
+      '<leader>vm',
+      function()
+        require('avante.api').ask { question = avante_summarize }
+      end,
+      desc = 'Summarize text(ask)',
+    },
+    {
+      '<leader>vn',
+      function()
+        require('avante.api').ask { question = avante_translate }
+      end,
+      desc = 'Translate text(ask)',
+    },
+    {
+      '<leader>vx',
+      function()
+        require('avante.api').ask { question = avante_explain_code }
+      end,
+      desc = 'Explain Code(ask)',
+    },
     {
       '<leader>vc',
       function()
@@ -363,7 +422,7 @@ require('which-key').add {
       desc = 'Docstring(ask)',
     },
     {
-      '<leader>vx',
+      '<leader>vb',
       function()
         require('avante.api').ask { question = avante_fix_bugs }
       end,
@@ -376,6 +435,27 @@ require('which-key').add {
   { '<leader>v', group = 'A[v]ante' }, -- NOTE: add for avante.nvim
   {
     mode = { 'v' },
+    {
+      '<leader>vG',
+      function()
+        prefill_edit_window(avante_grammar_correction)
+      end,
+      desc = 'Grammar Correction',
+    },
+    {
+      '<leader>vK',
+      function()
+        prefill_edit_window(avante_keywords)
+      end,
+      desc = 'Keywords',
+    },
+    {
+      '<leader>vO',
+      function()
+        prefill_edit_window(avante_optimize_code)
+      end,
+      desc = 'Optimize Code(edit)',
+    },
     {
       '<leader>vC',
       function()
@@ -391,7 +471,7 @@ require('which-key').add {
       desc = 'Docstring(edit)',
     },
     {
-      '<leader>vX',
+      '<leader>vB',
       function()
         prefill_edit_window(avante_fix_bugs)
       end,
