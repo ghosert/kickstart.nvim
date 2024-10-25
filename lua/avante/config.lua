@@ -9,9 +9,9 @@ local M = {}
 ---@class avante.Config
 M.defaults = {
   debug = false,
-  ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | [string]
-  provider = 'claude', -- Only recommend using Claude
-  auto_suggestions_provider = 'claude',
+  ---@alias Provider "ollama" | "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | [string]
+  provider = 'claude', -- Only recommend using 'claude', 'ollama' for local
+  auto_suggestions_provider = 'claude', -- recommand 'claude', 'ollama' for local
   ---@alias Tokenizer "tiktoken" | "hf"
   -- Used for counting tokens and encoding text.
   -- By default, we will use tiktoken.
@@ -86,7 +86,33 @@ Respect and use existing conventions, libraries, etc that are already present in
   ---To add support for custom provider, follow the format below
   ---See https://github.com/yetone/avante.nvim/README.md#custom-providers for more details
   ---@type {[string]: AvanteProvider}
-  vendors = {},
+  -- vendors = {},
+  vendors = {
+    ---@type AvanteProvider
+    ollama = {
+      ['local'] = true,
+      endpoint = '127.0.0.1:11434/v1',
+      model = 'codegemma', -- 'codegemma', 'llama3.2'
+      parse_curl_args = function(opts, code_opts)
+        return {
+          url = opts.endpoint .. '/chat/completions',
+          headers = {
+            ['Accept'] = 'application/json',
+            ['Content-Type'] = 'application/json',
+          },
+          body = {
+            model = opts.model,
+            messages = require('avante.providers').copilot.parse_message(code_opts), -- you can make your own message, but this is very advanced
+            max_tokens = 2048,
+            stream = true,
+          },
+        }
+      end,
+      parse_response_data = function(data_stream, event_state, opts)
+        require('avante.providers').openai.parse_response(data_stream, event_state, opts)
+      end,
+    },
+  },
   ---Specify the behaviour of avante.nvim
   ---1. auto_apply_diff_after_generation: Whether to automatically apply diff after LLM response.
   ---                                     This would simulate similar behaviour to cursor. Default to false.
