@@ -10,8 +10,8 @@ local M = {}
 M.defaults = {
   debug = false,
   ---@alias Provider "ollama" | "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | [string]
-  provider = 'claude', -- Only recommend using 'claude', 'ollama' for local
-  auto_suggestions_provider = 'claude', -- recommand 'claude', 'ollama' for local
+  provider = 'claude', -- NOTE: Only recommend using 'claude', 'ollama' for local
+  auto_suggestions_provider = 'claude', -- NOTE: recommand 'claude', 'ollama' for local
   ---@alias Tokenizer "tiktoken" | "hf"
   -- Used for counting tokens and encoding text.
   -- By default, we will use tiktoken.
@@ -92,7 +92,7 @@ Respect and use existing conventions, libraries, etc that are already present in
     ollama = {
       ['local'] = true,
       endpoint = '127.0.0.1:11434/v1',
-      model = 'codegemma', -- 'codegemma', 'llama3.2'
+      model = 'qwen2.5:14b', -- NOTE: 'codegemma', 'llama3.2', 'qwen2.5:14b', 'codestral'(need strong gpu)
       parse_curl_args = function(opts, code_opts)
         return {
           url = opts.endpoint .. '/chat/completions',
