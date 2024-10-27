@@ -213,11 +213,11 @@ vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>:pwd<CR>', { desc = 'Set file loc
 
 -- jiawzhang added to open terminal in a seprate view
 vim.api.nvim_create_user_command('Vspt', function()
-  vim.cmd 'vsplit | terminal'
+  vim.cmd 'vsplit | startinsert | terminal'
   vim.cmd 'setlocal nonumber norelativenumber'
 end, {})
 vim.api.nvim_create_user_command('Spt', function()
-  vim.cmd 'split | terminal'
+  vim.cmd 'split | startinsert | terminal'
   vim.cmd 'setlocal nonumber norelativenumber'
 end, {})
 
