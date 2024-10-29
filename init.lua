@@ -211,6 +211,8 @@ vim.o.expandtab = true
 -- jiawzhang add to swich working directory to current file location.
 vim.keymap.set('n', '<leader>.', ':cd %:p:h<CR>:pwd<CR>', { desc = 'Set file location as working directory', noremap = true, silent = true })
 
+-- set zsh as default shell for terminal inside neovim
+vim.o.shell = '/bin/zsh'
 -- jiawzhang added to open terminal in a seprate view
 vim.api.nvim_create_user_command('Vspt', function()
   vim.cmd 'vsplit | startinsert | terminal'
