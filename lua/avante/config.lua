@@ -354,6 +354,15 @@ local prefill_edit_window = function(request)
   -- Simulate Ctrl+S keypress to submit
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-s>', true, true, true), 'v', true)
 end
+
+local switch_provider = function(model)
+  require('avante.api').switch_provider(model)
+  -- open sidebar if it's not open.
+  if not require('avante.utils').is_sidebar_buffer(0) then
+    require('avante.api').ask()
+  end
+end
+
 -- NOTE: jiawzhang: most templates are inspired from ~/.config/nvim/chatgpt-actions.json
 local avante_grammar_correction = 'Correct the text to standard English, but keep any code blocks inside intact.'
 local avante_keywords = 'Extract the main keywords from the following text'
@@ -386,8 +395,20 @@ require('which-key').add {
   { '<leader>v', group = 'A[v]ante' }, -- NOTE: add for avante.nvim
   {
     mode = { 'n', 'v' },
-    { '<leader>vL', '<cmd>AvanteSwitchProvider ollama<CR>', desc = 'Local LLM' },
-    { '<leader>vC', '<cmd>AvanteSwitchProvider claude<CR>', desc = 'Claude LLM' },
+    {
+      '<leader>vL',
+      function()
+        switch_provider 'ollama'
+      end,
+      desc = 'Local LLM',
+    },
+    {
+      '<leader>vC',
+      function()
+        switch_provider 'claude'
+      end,
+      desc = 'Claude LLM',
+    },
     {
       '<leader>vg',
       function()
