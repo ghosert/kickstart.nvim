@@ -93,7 +93,7 @@ Respect and use existing conventions, libraries, etc that are already present in
       ['local'] = true,
       -- endpoint = '127.0.0.1:11434/v1',
       endpoint = '192.168.31.217:11434/v1', -- run `export OLLAMA_HOST="0.0.0.0:11434" && nohup ollama serve & diswn` to start ollama on MacOS, `pkill -9 ollama` to stop
-      model = 'qwen2.5:14b', -- NOTE: 'codegemma', 'llama3.2', 'qwen2.5:14b', 'codestral'(need strong gpu)
+      model = 'qwen2.5-coder:14b', -- NOTE: 'codegemma', 'llama3.2', 'qwen2.5:14b', 'codestral'(need strong gpu)
       parse_curl_args = function(opts, code_opts)
         return {
           url = opts.endpoint .. '/chat/completions',
