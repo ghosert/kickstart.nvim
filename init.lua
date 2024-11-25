@@ -1263,7 +1263,7 @@ require('lazy').setup({
   },
   -- NOTE: configuration is here: ~/.config/nvim/lua/avante/config.lua, '<leader>v' to trigger avante.nvim
   {
-    'yetone/avante.nvim',
+    'ghosert/avante.nvim',
     event = 'VeryLazy',
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
