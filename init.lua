@@ -878,6 +878,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
     },
     config = function()
       -- See `:help cmp`
@@ -937,6 +938,14 @@ require('lazy').setup({
 
       -- NOTE: jiawzhang: sources can be reset based by file type.
       -- cmp.setup.filetype('python', {sources = ...})
+      -- Setup for vim-dadbod plugin
+      cmp.setup.filetype({ 'sql', 'mysql', 'plsql' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' }, -- we've setup 'hrsh7th/cmp-buffer' above, buffer checks typed text inside sql file and use it as auto complettion next time when typing.
+        },
+      })
+
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -1307,6 +1316,40 @@ require('lazy').setup({
         ft = { 'markdown', 'Avante' },
       },
     },
+  },
+  -- NOTE: jiawzhang: add for sql in neovim, video tutorial: https://www.youtube.com/watch?v=ALGBuFLzDSA
+  -- type':DBUI'to open database, you can open it in a dedicated neovim tab by `:tabnew`
+  -- `:w` save sql file to execute sql in current file
+  -- select sql lines and <leader>S to execute selected sql
+  -- <leader>W to save query file for future inside ~/docker/nvim_db_ui/
+  -- `zo` to open folder if any in result window, `zc` to close folder, `zR` to open all the folders
+  {
+    'kristijanhusak/vim-dadbod-ui',
+    dependencies = {
+      { 'tpope/vim-dadbod', lazy = true },
+      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+    },
+    cmd = {
+      'DBUI',
+      'DBUIToggle',
+      'DBUIAddConnection',
+      'DBUIFindBuffer',
+    },
+    init = function()
+      -- Your DBUI configuration
+      vim.g.db_ui_use_nerd_fonts = 1
+      vim.g.dbs = {
+        { name = 'mysql-dev', url = 'mysql://root@127.0.0.1:3306/zuoye' }, -- check ~/.my.cnf for u/p, ~/.my.cnf is coming from ~/docker
+        --[[ {
+          name = 'production',
+          url = function()
+            return vim.fn.system 'get-prod-url'
+          end,
+        }, ]]
+      }
+      -- default query save location as below
+      vim.g.db_ui_save_location = '~/docker/nvim_db_ui'
+    end,
   },
 
   -- TODO:jiawzhang
