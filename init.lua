@@ -1339,13 +1339,22 @@ require('lazy').setup({
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
       vim.g.dbs = {
-        { name = 'mysql-dev', url = 'mysql://root@127.0.0.1:3306/zuoye' }, -- check ~/.my.cnf for u/p, ~/.my.cnf is coming from ~/docker
-        --[[ {
-          name = 'production',
+        -- mysql database: check ~/.my.cnf for u/p, ~/.my.cnf is coming from ~/docker to avoid command line password warning
+        -- need to install mysql client first: `sudo apt install -y mysql-client-core-8.0` or `brew install mysql@8.0 && brew link mysql@8.0 --force`
+        -- MYSQL_DEV_URL defined in ~/.zshrc
+        {
+          name = 'mysql-dev',
           url = function()
-            return vim.fn.system 'get-prod-url'
+            return os.getenv 'MYSQL_DEV_URL'
           end,
-        }, ]]
+        },
+        -- sqlserver/azuresql database: you need to install sqlcmd first: Ubuntu: https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver16&tabs=go%2Clinux&pivots=cs1-bash#download-and-install-go-sqlcmd  or MacOS: `brew install sqlcmd`
+        {
+          name = 'azuresql-dev',
+          url = function()
+            return os.getenv 'AZURESQL_DEV_URL'
+          end,
+        },
       }
       -- default query save location as below
       vim.g.db_ui_save_location = '~/docker/nvim_db_ui'
