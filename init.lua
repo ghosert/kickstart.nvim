@@ -1360,6 +1360,9 @@ require('lazy').setup({
       vim.g.db_ui_save_location = '~/docker/nvim_db_ui'
     end,
   },
+  {
+    'rest-nvim/rest.nvim',
+  },
 
   -- TODO:jiawzhang
   -- Install LSP/DAP/LINTER/FORMATTER for html, css, json, vscode-langservers-extracted:
