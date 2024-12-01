@@ -397,6 +397,27 @@ require('lazy').setup({
       require('which-key').add {
         { '<leader>h', desc = 'Git [H]unk', mode = { 'n', 'v' } },
       }
+
+      -- Autocommand to define keybindings for *.http files, for rest.nvim, sample is in ./sample/http/rest.nvim.sample.http
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'http', -- Filetype for *.http files
+        callback = function()
+          require('which-key').add {
+            { '<leader>r', group = 'RestAPI', buffer = 0 }, --Bind to the current buffer
+            {
+              mode = { 'n', 'v' },
+              buffer = 0, --Bind to the current buffer
+              { '<leader>rr', '<cmd>Rest run<CR>', desc = 'Rest run' },
+              { '<leader>rl', '<cmd>Rest last<CR>', desc = 'Rest last' },
+              { '<leader>rg', '<cmd>Rest logs<CR>', desc = 'Rest logs' },
+              { '<leader>ro', '<cmd>Rest open<CR>', desc = 'Rest open' },
+              { '<leader>re', '<cmd>Rest env show<CR>', desc = 'Rest env show' }, -- by default loading ./sample/http/.env
+              { '<leader>rs', '<cmd>Rest env select<CR>', desc = 'Rest env select' }, -- select ./sample/http/.env.prod if you want
+              { '<leader>rk', '<cmd>Rest cookies<CR>', desc = 'Rest cookies' },
+            },
+          }
+        end,
+      })
     end,
   },
 
@@ -1419,6 +1440,17 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- for rest.nvim full sample: ~/.local/share/nvim/lazy/rest.nvim/spec/examples/
+vim.g.rest_nvim = {
+  request = {
+    skip_ssl_verification = true,
+  },
+  custom_dynamic_variables = { -- Define dynamic variables
+    base_url = 'https://api.example.com', -- Base URL for API requests
+    token = 'your-access-token', -- Bearer token for authorization
+  },
+}
 
 -- to make avante.tokenizers and templates to work
 require('avante_lib').load()

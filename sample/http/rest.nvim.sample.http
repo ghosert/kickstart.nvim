@@ -1,0 +1,39 @@
+# more details on http syntax: https://www.jetbrains.com/help/idea/exploring-http-syntax.html
+# more samples: https://github.com/rest-nvim/rest.nvim/tree/main/spec/examples
+
+# In-place variable syntax
+@myhost = api.github.com
+
+### basic get statement
+GET https://{{myhost}}/users/boltlessengineer
+user-agent: neovim
+
+### basic get statement
+GET /users/boltlessengineer
+Host: {{myhost}}
+user-agent: neovim
+
+### get statement for {{api_url}}
+GET {{api_url}}
+
+### multi-line url
+// reference: https://www.jetbrains.com/help/idea/exploring-http-syntax.html#break-long-requests-into-several-lines
+// You can span url to multiple lines by adding whitespace indents
+GET http://example.com:8080
+    /api
+    /html
+    /get
+    ?id=123
+    &value=content
+
+
+### handle response
+GET https://{{myhost}}/users/boltlessengineer
+
+# @lang=lua
+> {%
+local json = vim.json.decode(response.body)
+print("json.login: " .. json.login .. " json.id: " .. json.id)
+json.data = "overritten"
+response.body = vim.json.encode(json)
+%}
