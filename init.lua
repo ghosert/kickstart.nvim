@@ -1377,6 +1377,15 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- disable result fold in dbout window on the bottom, otherwise sometimes I saw foldenable result
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'dbout',
+        callback = function()
+          vim.opt_local.foldenable = false
+        end,
+      })
+
       -- default query save location as below
       vim.g.db_ui_save_location = '~/docker/nvim_db_ui'
     end,
