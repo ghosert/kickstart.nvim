@@ -398,29 +398,67 @@ require('lazy').setup({
         { '<leader>h', desc = 'Git [H]unk', mode = { 'n', 'v' } },
       }
 
-      -- Autocommand to define keybindings for *.http files, for rest.nvim, sample is in ./sample/http/rest.nvim.sample.http
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'http', -- Filetype for *.http files
         callback = function()
-          require('which-key').add {
-            { '<leader>r', group = 'RestAPI', buffer = 0 }, --Bind to the current buffer
-            {
-              mode = { 'n', 'v' },
-              buffer = 0, --Bind to the current buffer
-              { '<leader>rr', '<cmd>Rest run<CR>', desc = 'Rest run' },
-              { '<leader>rl', '<cmd>Rest last<CR>', desc = 'Rest last' },
-              { '<leader>rg', '<cmd>Rest logs<CR>', desc = 'Rest logs' },
-              { '<leader>ro', '<cmd>Rest open<CR>', desc = 'Rest open' },
-              { '<leader>re', '<cmd>Rest env show<CR>', desc = 'Rest env show' }, -- by default loading ./sample/http/.env
-              { '<leader>rs', '<cmd>Rest env select<CR>', desc = 'Rest env select' }, -- select ./sample/http/.env.prod if you want
-              { '<leader>rk', '<cmd>Rest cookies<CR>', desc = 'Rest cookies' },
-            },
-          }
+          -- Autocommand to define keybindings for *.http files, for rest.nvim, sample is in ./sample/http/rest.nvim.sample.http
+          if vim.bo.filetype == 'http' then
+            require('which-key').add {
+              { '<leader>r', group = 'RestAPI', buffer = 0 }, --Bind to the current buffer
+              {
+                mode = { 'n', 'v' },
+                buffer = 0, --Bind to the current buffer
+                { '<leader>rr', '<cmd>Rest run<CR>', desc = 'Rest run' },
+                { '<leader>rl', '<cmd>Rest last<CR>', desc = 'Rest last' },
+                { '<leader>rg', '<cmd>Rest logs<CR>', desc = 'Rest logs' },
+                { '<leader>ro', '<cmd>Rest open<CR>', desc = 'Rest open' },
+                { '<leader>re', '<cmd>Rest env show<CR>', desc = 'Rest env show' }, -- by default loading ./sample/http/.env
+                { '<leader>rs', '<cmd>Rest env select<CR>', desc = 'Rest env select' }, -- select ./sample/http/.env.prod if you want
+                { '<leader>rk', '<cmd>Rest cookies<CR>', desc = 'Rest cookies' },
+              },
+            }
+          else -- for anything else but http file type like: java/python/lua/js
+            require('which-key').add {
+              { '<leader>r', group = 'Sniprun', buffer = 0 }, --Bind to the current buffer
+              {
+                mode = { 'v' },
+                buffer = 0, --Bind to the current buffer
+                { '<leader>rr', '<Plug>SnipRun', desc = 'SnipRun selected lines in visual mode' },
+              },
+              {
+                mode = { 'n' },
+                buffer = 0, --Bind to the current buffer
+                { '<leader>rr', '<cmd>%SnipRun<CR>', desc = 'SnipRun the entire source code' },
+              },
+              {
+                mode = { 'n', 'v' },
+                buffer = 0, --Bind to the current buffer
+                { '<leader>ri', '<Plug>SnipInfo', desc = 'SnipInfo' },
+                { '<leader>rR', '<Plug>SnipReset', desc = 'SnipReset' },
+                { '<leader>rm', '<Plug>SnipReplMemoryClean', desc = 'SnipReplMemoryClean' },
+                { '<leader>rc', '<Plug>SnipClose', desc = 'SnipClose' },
+                { '<leader>rl', '<Plug>SnipLive', desc = 'SnipLive' },
+              },
+            }
+          end
         end,
       })
     end,
   },
-
+  -- NOTE: jiawzhang: Run selected source code lines: https://michaelb.github.io/sniprun/sources/README.html
+  -- NOTE: MacOS installation for sniprun requires rust toolchain here: https://www.rust-lang.org/tools/install
+  {
+    'michaelb/sniprun',
+    branch = 'master',
+    build = 'sh install.sh',
+    -- do 'sh install.sh 1' if you want to force compile locally
+    -- (instead of fetching a binary from the github release). Requires Rust >= 1.65
+    config = function()
+      require('sniprun').setup {
+        -- your options
+        -- live_mode_toggle = 'enable', -- this is danger in bash/zsh, since it will eecute when you typing `rm -rf /bin/` while your full path is to type `rm -rf /bin/tmp`
+      }
+    end,
+  },
   -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
