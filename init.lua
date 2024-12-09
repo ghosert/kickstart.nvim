@@ -456,6 +456,12 @@ require('lazy').setup({
       require('sniprun').setup {
         -- your options
         -- live_mode_toggle = 'enable', -- this is danger in bash/zsh, since it will eecute when you typing `rm -rf /bin/` while your full path is to type `rm -rf /bin/tmp`
+        interpreter_options = {
+          Python3_original = {
+            interpreter = 'python2.7', -- Set the path to your desired Python interpreter
+            venv = { '/home/jiawzhang/devenv' },
+          },
+        },
       }
     end,
   },
