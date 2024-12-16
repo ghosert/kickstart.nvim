@@ -1495,6 +1495,7 @@ require('lazy').setup({
 -- vim: ts=2 sts=2 sw=2 et
 
 -- for rest.nvim full sample: ~/.local/share/nvim/lazy/rest.nvim/spec/examples/
+-- added ./ftplugin/json.lua to make response json format work: https://github.com/rest-nvim/rest.nvim/issues/414
 vim.g.rest_nvim = {
   request = {
     skip_ssl_verification = true,
