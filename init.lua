@@ -1506,5 +1506,13 @@ vim.g.rest_nvim = {
   },
 }
 
+-- treat *.mako as html filetype
+vim.cmd [[
+  augroup mako_ft
+    autocmd!
+    autocmd BufRead,BufNewFile *.mako set filetype=html
+  augroup END
+]]
+
 -- to make avante.tokenizers and templates to work
 require('avante_lib').load()
