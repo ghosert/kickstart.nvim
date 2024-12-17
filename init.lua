@@ -1011,6 +1011,17 @@ require('lazy').setup({
         },
       })
 
+      -- Setup for HTML files, copy existing source names + 'buffer' as additional source name, especially for *.mako files
+      cmp.setup.filetype('html', {
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'path' },
+          { name = 'buffer' },
+        },
+      })
+
+      -- Default setup for all other filetypes
       cmp.setup {
         snippet = {
           expand = function(args)
