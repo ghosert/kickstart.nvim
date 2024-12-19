@@ -1424,6 +1424,12 @@ require('lazy').setup({
             return os.getenv 'MYSQL_DEV_URL'
           end,
         },
+        {
+          name = 'mysql-prod',
+          url = function()
+            return os.getenv 'MYSQL_PROD_URL'
+          end,
+        },
         -- sqlserver/azuresql database: you need to install sqlcmd first: Ubuntu: https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver16&tabs=go%2Clinux&pivots=cs1-bash#download-and-install-go-sqlcmd  or MacOS: `brew install sqlcmd`
         {
           name = 'azuresql-dev',
