@@ -1437,6 +1437,12 @@ require('lazy').setup({
             return os.getenv 'AZURESQL_DEV_URL'
           end,
         },
+        {
+          name = 'azuresql-prod',
+          url = function()
+            return os.getenv 'AZURESQL_PROD_URL'
+          end,
+        },
       }
 
       -- disable result fold in dbout window on the bottom, otherwise sometimes I saw foldenable result
