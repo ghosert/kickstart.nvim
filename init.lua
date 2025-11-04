@@ -983,7 +983,7 @@ require('lazy').setup({
         --    $body
         --  end
         --
-        -- NOTE: jiawzhang: this is really good to moe cursor to the next parameter when snippet activates.
+        -- NOTE: jiawzhang: this is really good to move cursor to the next parameter when snippet activates.
         -- <c-l> will move you to the right of each of the expansion locations.
         -- <c-h> is similar, except moving you backwards.
         ['<C-l>'] = cmp.mapping(function()
