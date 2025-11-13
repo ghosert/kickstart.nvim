@@ -101,7 +101,7 @@ M.defaults = {
       __inherited_from = 'openai',
       -- endpoint = 'http://127.0.0.1:11434/v1',
       endpoint = 'http://192.168.31.217:11434/v1', -- run `export OLLAMA_HOST="0.0.0.0:11434" && nohup ollama serve & diswn` to start ollama on MacOS, `pkill -9 ollama` to stop
-      model = 'qwen2.5-coder:14b', -- NOTE: 'codegemma', 'llama3.2', 'qwen2.5:14b', 'codestral'(need strong gpu)
+      model = 'qwen3-coder:30b', -- NOTE: 'qwen3-coder:30b', 'qwen2.5:14b'
     },
   },
   ---Specify the special dual_boost mode
