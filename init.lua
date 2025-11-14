@@ -1348,22 +1348,27 @@ require('lazy').setup({
   },
   -- NOTE: configuration is here: ~/.config/nvim/lua/avante/config.lua, '<leader>v' to trigger avante.nvim
   {
-    'ghosert/avante.nvim',
+    'yetone/avante.nvim',
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    -- ⚠️ must add this setting! ! !
+    build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
     event = 'VeryLazy',
-    lazy = false,
-    version = false, -- set this if you want to always pull the latest change
+    version = false, -- Never set this value to "*"! Never!
+    ---@module 'avante'
+    ---@type avante.Config
     opts = {
       -- add any opts here
     },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = 'make',
-    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'stevearc/dressing.nvim',
       'nvim-lua/plenary.nvim',
       'MunifTanjim/nui.nvim',
       --- The below dependencies are optional,
+      'nvim-mini/mini.pick', -- for file_selector provider mini.pick
+      'nvim-telescope/telescope.nvim', -- for file_selector provider telescope
+      'hrsh7th/nvim-cmp', -- autocompletion for avante commands and mentions
+      'ibhagwan/fzf-lua', -- for file_selector provider fzf
+      'stevearc/dressing.nvim', -- for input provider dressing
+      'folke/snacks.nvim', -- for input provider snacks
       'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
       'zbirenbaum/copilot.lua', -- for providers='copilot'
       {
@@ -1536,6 +1541,3 @@ vim.cmd [[
     autocmd BufRead,BufNewFile *.mako set filetype=html
   augroup END
 ]]
-
--- to make avante.tokenizers and templates to work
-require('avante_lib').load()
