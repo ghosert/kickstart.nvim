@@ -1217,7 +1217,7 @@ require('lazy').setup({
           { type = 'text', val = 'Bookmarks', opts = { hl = 'SpecialComment', shrink_margin = false } },
           { type = 'padding', val = 1 },
           -- Add your bookmarks as buttons here
-          dashboard.button('o', 'Note-Taking', ':e ~/VimProject/note.md <CR>'),
+          dashboard.button('o', 'Note-Taking', ':e ~/VimProject/note-taking/note.md <CR>'),
           dashboard.button('d', 'universal Dockerfile', ':e ~/docker/Dockerfile <CR>'),
           dashboard.button('s', 'universal docker script', ':e ~/docker/docker.sh <CR>'),
           dashboard.button('n', 'neovim init.lua', ':e ~/.config/nvim/init.lua <CR>'),
@@ -1389,7 +1389,7 @@ require('lazy').setup({
         },
       },
       {
-        -- Make sure to set this up properly if you have lazy=true, NOTE: jiawzhang: this plugin also impacts all the markdown files like ~/VimProject/note.md
+        -- Make sure to set this up properly if you have lazy=true, NOTE: jiawzhang: this plugin also impacts all the markdown files like ~/VimProject/note-taking/note.md
         'MeanderingProgrammer/render-markdown.nvim',
         opts = {
           file_types = { 'markdown', 'Avante' },
