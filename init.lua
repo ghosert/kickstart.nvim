@@ -1239,7 +1239,7 @@ require('lazy').setup({
     'coder/claudecode.nvim',
     dependencies = {
       'folke/snacks.nvim',
-      -- jiawzhang NOTE: adding keys to move cursor between claude code pane and neovim pane.
+      -- jiawzhang NOTE: adding keys to move cursor between claude code pane and neovim pane, it will work for opencode.nvim -> snacks.nvim as well.
       keys = {
         { '<C-h>', '<cmd>TmuxNavigateLeft<cr>', mode = 't' },
         { '<C-l>', '<cmd>TmuxNavigateRight<cr>', mode = 't' },
@@ -1248,7 +1248,7 @@ require('lazy').setup({
     config = true,
     keys = {
       { '<leader>a', nil, desc = 'AI/Claude Code' },
-      { '<leader>ac', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
+      { '<leader>at', '<cmd>ClaudeCode<cr>', desc = 'Toggle Claude' },
       { '<leader>af', '<cmd>ClaudeCodeFocus<cr>', desc = 'Focus Claude' },
       { '<leader>ar', '<cmd>ClaudeCode --resume<cr>', desc = 'Resume Claude' },
       { '<leader>aC', '<cmd>ClaudeCode --continue<cr>', desc = 'Continue Claude' },
@@ -1265,6 +1265,49 @@ require('lazy').setup({
       { '<leader>aa', '<cmd>ClaudeCodeDiffAccept<cr>', desc = 'Accept diff' },
       { '<leader>ad', '<cmd>ClaudeCodeDiffDeny<cr>', desc = 'Deny diff' },
     },
+  },
+  {
+    'NickvanDyke/opencode.nvim',
+    dependencies = {
+      -- Recommended for `ask()` and `select()`.
+      -- Required for `snacks` provider.
+      ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+      { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
+    },
+    config = function()
+      ---@type opencode.Opts
+      vim.g.opencode_opts = {
+        -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+      }
+
+      -- Required for `opts.auto_reload`.
+      vim.o.autoread = true
+
+      -- Recommended/example keymaps.
+      vim.keymap.set({ 'n', 'x' }, '<leader>oa', function()
+        require('opencode').ask('@this: ', { submit = true })
+      end, { desc = 'Ask opencode' })
+      vim.keymap.set({ 'n', 'x' }, '<leader>ox', function()
+        require('opencode').select()
+      end, { desc = 'Execute opencode action…' })
+      vim.keymap.set({ 'n', 'x' }, '<leader>os', function()
+        require('opencode').prompt '@this'
+        vim.cmd 'TmuxNavigateRight'
+      end, { desc = 'Send to opencode' })
+      vim.keymap.set({ 'n', 't' }, '<leader>ot', function()
+        require('opencode').toggle()
+        vim.cmd 'TmuxNavigateRight'
+      end, { desc = 'Toggle opencode' })
+      vim.keymap.set('n', '<C-q>', function()
+        require('opencode').command 'session.half.page.up'
+      end, { desc = 'opencode half page up' })
+      vim.keymap.set('n', '<C-e>', function()
+        require('opencode').command 'session.half.page.down'
+      end, { desc = 'opencode half page down' })
+      -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+      -- vim.keymap.set('n', '+', '<C-a>', { desc = 'Increment', noremap = true })
+      -- vim.keymap.set('n', '-', '<C-x>', { desc = 'Decrement', noremap = true })
+    end,
   },
   { -- jiawzhang, add for use ctrl + hjkl to move focus from neovim to another tmux window.
     'christoomey/vim-tmux-navigator',

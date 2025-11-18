@@ -187,7 +187,8 @@ return {
       -- Show commands
       keyset('n', '<space>l', ':<C-u>CocList commands<cr>', opts)
       -- Find symbol of current document
-      keyset('n', '<space>o', ':<C-u>CocList outline<cr>', opts)
+      -- jiawzhang update this from 'o' to 'O' to allow '<leader>o' for opencode.nvim
+      keyset('n', '<space>O', ':<C-u>CocList outline<cr>', opts)
       -- Search workspace symbols
       keyset('n', '<space>i', ':<C-u>CocList -I symbols<cr>', opts)
       -- Do default action for next item
