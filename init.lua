@@ -1307,6 +1307,11 @@ require('lazy').setup({
       -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
       -- vim.keymap.set('n', '+', '<C-a>', { desc = 'Increment', noremap = true })
       -- vim.keymap.set('n', '-', '<C-x>', { desc = 'Decrement', noremap = true })
+      -- jiawzhang TODO: add more self defined prompts below
+      vim.keymap.set({ 'n', 'x' }, '<leader>oe', function()
+        require('opencode').prompt 'Explain @this and its context'
+        vim.cmd 'TmuxNavigateRight'
+      end, { desc = 'Explain in opencode' })
     end,
   },
   { -- jiawzhang, add for use ctrl + hjkl to move focus from neovim to another tmux window.
