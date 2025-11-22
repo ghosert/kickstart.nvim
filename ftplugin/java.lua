@@ -58,7 +58,7 @@ end)()
 local cpu = (function()
   -- Lua example to detect ARM architecture
   local architecture = vim.fn.system 'uname -m'
-  if architecture:match 'arm' then
+  if architecture:match 'arm' or architecture:match 'aarch64' then
     return 'arm'
   end
   return ''
