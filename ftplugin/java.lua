@@ -66,13 +66,13 @@ end)()
 
 local java_path = (function()
   if system == 'mac' then
-    return '/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home'
+    return '/Library/Java/JavaVirtualMachines/zulu-21.jdk/Contents/Home'
   end
   if system == 'linux' then
     if cpu == 'arm' then
-      return '/usr/lib/jvm/java-17-openjdk-arm64'
+      return '/usr/lib/jvm/java-21-openjdk-arm64'
     else
-      return '/usr/lib/jvm/java-17-openjdk-amd64'
+      return '/usr/lib/jvm/java-21-openjdk-amd64'
     end
   end
 end)()
@@ -129,7 +129,7 @@ local config = {
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   settings = {
     java = {
-      -- TODO Replace this with the absolute path to your main java version (JDK 17 or higher)
+      -- TODO Replace this with the absolute path to your main java version (JDK 21 or higher)
       home = java_path,
       eclipse = {
         downloadSources = true,
@@ -140,7 +140,7 @@ local config = {
         -- The runtime name parameters need to match specific Java execution environments.  See https://github.com/tamago324/nlsp-settings.nvim/blob/2a52e793d4f293c0e1d61ee5794e3ff62bfbbb5d/schemas/_generated/jdtls.json#L317-L334
         runtimes = {
           {
-            name = 'JavaSE-17',
+            name = 'JavaSE-21',
             path = java_path,
           },
         },
