@@ -90,7 +90,13 @@ local bundles = {
 }
 
 -- Needed for running/debugging unit tests
-vim.list_extend(bundles, vim.split(vim.fn.glob(vim.env.HOME .. '/.local/share/nvim/mason/share/java-test/*.jar', 1), '\n'))
+-- Exclude jacocoagent.jar and test.runner-jar-with-dependencies.jar as they are not valid OSGi bundles
+-- These JARs are Java agents/utilities, not Eclipse plugins, so they cause "Failed to get bundleInfo" errors
+for _, bundle in ipairs(vim.split(vim.fn.glob(vim.env.HOME .. '/.local/share/nvim/mason/share/java-test/*.jar', 1), '\n')) do
+  if not string.match(bundle, 'jacocoagent%.jar') and not string.match(bundle, 'test%.runner%-jar%-with%-dependencies%.jar') then
+    table.insert(bundles, bundle)
+  end
+end
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
