@@ -1275,8 +1275,7 @@ require('lazy').setup({
     },
   },
   {
-    -- jiawzhang TODO:replace below back to 'NickvanDyke/opencode.nvim', once my pull request is merged.
-    'ghosert/opencode.nvim',
+    'NickvanDyke/opencode.nvim',
     dependencies = {
       -- Recommended for `ask()` and `select()`.
       -- Required for `snacks` provider.
