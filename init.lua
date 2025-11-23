@@ -182,10 +182,18 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- NOTE: Using <C-q> instead of <Esc><Esc> to avoid conflict with timeoutlen=0 to exit terminal mode, 't' below means terminal
+-- Press <C-q> in terminal mode to switch back to normal mode from terminal mode, so that you can copy/paste in terminal
+vim.keymap.set('t', '<C-q>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+--Fix space key delay in terminal mode by disabling timeoutlen
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Disable leader key timeout in terminal mode',
+  group = vim.api.nvim_create_augroup('terminal-timeoutlen', { clear = true }),
+  callback = function()
+    vim.opt_local.timeoutlen = 0
+  end,
+})
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
