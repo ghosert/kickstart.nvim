@@ -406,50 +406,7 @@ require('lazy').setup({
         { '<leader>h', desc = 'Git [H]unk', mode = { 'n', 'v' } },
       }
 
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function()
-          -- Autocommand to define keybindings for *.http files, for rest.nvim, sample is in ./sample/http/rest.nvim.sample.http
-          if vim.bo.filetype == 'http' then
-            require('which-key').add {
-              { '<leader>r', group = 'RestAPI', buffer = 0 }, --Bind to the current buffer
-              {
-                mode = { 'n', 'v' },
-                buffer = 0, --Bind to the current buffer
-                { '<leader>rr', '<cmd>Rest run<CR>', desc = 'Rest run' },
-                { '<leader>rl', '<cmd>Rest last<CR>', desc = 'Rest last' },
-                { '<leader>rg', '<cmd>Rest logs<CR>', desc = 'Rest logs' },
-                { '<leader>ro', '<cmd>Rest open<CR>', desc = 'Rest open' },
-                { '<leader>re', '<cmd>Rest env show<CR>', desc = 'Rest env show' }, -- by default loading ./sample/http/.env
-                { '<leader>rs', '<cmd>Rest env select<CR>', desc = 'Rest env select' }, -- select ./sample/http/.env.prod if you want
-                { '<leader>rk', '<cmd>Rest cookies<CR>', desc = 'Rest cookies' },
-              },
-            }
-          else -- for anything else but http file type like: java/python/lua/js
-            require('which-key').add {
-              { '<leader>r', group = 'Sniprun', buffer = 0 }, --Bind to the current buffer
-              {
-                mode = { 'v' },
-                buffer = 0, --Bind to the current buffer
-                { '<leader>rr', '<Plug>SnipRun', desc = 'SnipRun selected lines in visual mode' },
-              },
-              {
-                mode = { 'n' },
-                buffer = 0, --Bind to the current buffer
-                { '<leader>rr', '<cmd>%SnipRun<CR>', desc = 'SnipRun the entire source code' },
-              },
-              {
-                mode = { 'n', 'v' },
-                buffer = 0, --Bind to the current buffer
-                { '<leader>ri', '<Plug>SnipInfo', desc = 'SnipInfo' },
-                { '<leader>rR', '<Plug>SnipReset', desc = 'SnipReset' },
-                { '<leader>rm', '<Plug>SnipReplMemoryClean', desc = 'SnipReplMemoryClean' },
-                { '<leader>rc', '<Plug>SnipClose', desc = 'SnipClose' },
-                { '<leader>rl', '<Plug>SnipLive', desc = 'SnipLive' },
-              },
-            }
-          end
-        end,
-      })
+      -- NOTE: RestAPI and Sniprun keybindings are set up in autocmd after lazy.setup (see bottom of file)
     end,
   },
   -- NOTE: jiawzhang: Run selected source code lines: https://michaelb.github.io/sniprun/sources/README.html
@@ -1541,3 +1498,52 @@ vim.cmd [[
     autocmd BufRead,BufNewFile *.mako set filetype=html
   augroup END
 ]]
+
+-- RestAPI and Sniprun keybindings based on filetype
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    if vim.bo.filetype == 'http' then
+      -- RestAPI keybindings for *.http files (rest.nvim)
+      -- Sample: ./sample/http/rest.nvim.sample.http
+      require('which-key').add {
+        { '<leader>r', group = 'RestAPI', buffer = 0 },
+        {
+          mode = { 'n', 'v' },
+          buffer = 0,
+          { '<leader>rr', '<cmd>Rest run<CR>', desc = 'Rest run' },
+          { '<leader>rl', '<cmd>Rest last<CR>', desc = 'Rest last' },
+          { '<leader>rg', '<cmd>Rest logs<CR>', desc = 'Rest logs' },
+          { '<leader>ro', '<cmd>Rest open<CR>', desc = 'Rest open' },
+          { '<leader>re', '<cmd>Rest env show<CR>', desc = 'Rest env show' },
+          { '<leader>rs', '<cmd>Rest env select<CR>', desc = 'Rest env select' },
+          { '<leader>rk', '<cmd>Rest cookies<CR>', desc = 'Rest cookies' },
+        },
+      }
+    else
+      -- Sniprun keybindings for all other filetypes
+      require('which-key').add {
+        { '<leader>r', group = 'Sniprun', buffer = 0 },
+        {
+          mode = { 'v' },
+          buffer = 0,
+          { '<leader>rr', '<Plug>SnipRun', desc = 'SnipRun selected lines in visual mode' },
+        },
+        {
+          mode = { 'n' },
+          buffer = 0,
+          { '<leader>rr', '<cmd>%SnipRun<CR>', desc = 'SnipRun the entire source code' },
+        },
+        {
+          mode = { 'n', 'v' },
+          buffer = 0,
+          { '<leader>ri', '<Plug>SnipInfo', desc = 'SnipInfo' },
+          { '<leader>rR', '<Plug>SnipReset', desc = 'SnipReset' },
+          { '<leader>rm', '<Plug>SnipReplMemoryClean', desc = 'SnipReplMemoryClean' },
+          { '<leader>rc', '<Plug>SnipClose', desc = 'SnipClose' },
+          { '<leader>rl', '<Plug>SnipLive', desc = 'SnipLive' },
+        },
+      }
+    end
+  end,
+})
