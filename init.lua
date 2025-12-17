@@ -1083,7 +1083,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'java', 'python', 'javascript', 'query', 'markdown_inline' },
+      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'java', 'python', 'javascript', 'query', 'markdown_inline', 'gitcommit' },
       -- Autoinstall languages that are not installed, jiawzhang NOTE: have to add 'query' and 'markdown_inline' otherwise :checkhealth reports errors.
       auto_install = true,
       highlight = {
