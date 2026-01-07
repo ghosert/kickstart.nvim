@@ -403,7 +403,7 @@ M._defaults = {
     ---@type AvanteSupportedProvider
     ollama = {
       -- endpoint = 'http://127.0.0.1:11434',
-      endpoint = 'http://192.168.31.217:11434', -- run `export OLLAMA_HOST="0.0.0.0:11434" && nohup ollama serve & diswn` to start ollama on MacOS, `pkill -9 ollama` to stop
+      endpoint = 'http://192.168.31.217:11434', -- run `export OLLAMA_HOST="0.0.0.0:11434" && nohup ollama serve & disown` to start ollama on MacOS, `pkill -9 ollama` to stop
       model = 'qwen3-coder:30b', -- jiawzhang NOTE: 'qwen3-coder:30b', 'qwen2.5:14b'
       disable_tools = true, -- jiawzhang NOTE: qwen LLM may not support tools, disable it
       timeout = 30000, -- Timeout in milliseconds
