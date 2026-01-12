@@ -338,7 +338,9 @@ M._defaults = {
     ---@type AvanteSupportedProvider
     claude = {
       endpoint = 'https://api.anthropic.com',
-      model = 'claude-sonnet-4-5-20250929',
+      model = 'claude-opus-4-5-20251101', -- Claude Opus 4.5 (latest)
+      -- model = 'claude-sonnet-4-5-20250929',
+      auth_type = 'max', -- Use Claude Max subscription via OAuth, otherwise use 'api'
       timeout = 30000, -- Timeout in milliseconds
       context_window = 200000,
       extra_request_body = {

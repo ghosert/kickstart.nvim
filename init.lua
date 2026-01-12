@@ -1083,7 +1083,22 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'java', 'python', 'javascript', 'query', 'markdown_inline', 'gitcommit' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'vim',
+        'vimdoc',
+        'java',
+        'python',
+        'javascript',
+        'query',
+        'markdown_inline',
+        'gitcommit',
+      },
       -- Autoinstall languages that are not installed, jiawzhang NOTE: have to add 'query' and 'markdown_inline' otherwise :checkhealth reports errors.
       auto_install = true,
       highlight = {
@@ -1304,8 +1319,9 @@ require('lazy').setup({
     },
   },
   -- NOTE: configuration is here: ~/.config/nvim/lua/avante/config.lua, '<leader>v' to trigger avante.nvim
+  -- NOTE: jiawzhang: using forked repo with Claude Max OAuth fixes (PR pending to upstream)
   {
-    'yetone/avante.nvim',
+    'ghosert/avante.nvim',
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     -- ⚠️ must add this setting! ! !
     build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
