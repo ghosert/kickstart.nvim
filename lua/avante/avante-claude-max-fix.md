@@ -53,6 +53,23 @@ Then run `:Lazy sync` in Neovim again.
 sudo apt-get install libssl-dev
 ```
 
+### Missing Native Libraries (macOS only so far)
+**Error**: `Make sure to build avante (missing avante_templates)` when opening avante panel
+
+**Cause**: The build script writes a `.tag` file to mark the version as "built" before/during downloading pre-built binaries. If the download is interrupted (network glitch, etc.), the `.tag` file exists but the actual `.dylib` files are missing. Next time the build runs, it sees the tag matches the latest release and skips downloading.
+
+**Fix**:
+```vim
+:Lazy build avante.nvim
+```
+
+If that doesn't work (because the stale tag still exists), first delete the tag file:
+```bash
+rm ~/.local/share/nvim/lazy/avante.nvim/build/.tag
+```
+
+Then run `:Lazy build avante.nvim` again in Neovim.
+
 ## Issues Fixed in Fork
 
 ### Issue 1: OAuth URL Not Displayed in Terminal
