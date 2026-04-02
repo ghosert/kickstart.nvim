@@ -92,7 +92,8 @@ Then run `:Lazy build avante.nvim` again in Neovim.
 **Fixes applied** (based on [opencode-anthropic-auth PR #10](https://github.com/anomalyco/opencode-anthropic-auth/pull/10) and [PR #11](https://github.com/anomalyco/opencode-anthropic-auth/pull/11)):
 
 - Add `?beta=true` to API URL
-- Set User-Agent header to `claude-cli/2.1.2 (external, cli)`
+- Set User-Agent header to match installed Claude CLI version (e.g., `claude-cli/2.1.90 (external, cli)`)
+- Use `prompt-caching-scope-2026-01-05` instead of old `prompt-caching-2024-07-31` beta header
 - Remove `fine-grained-tool-streaming` from beta headers
 - Prefix tool names with `av_` to bypass Anthropic's tool name validation
 
