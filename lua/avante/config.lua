@@ -665,6 +665,8 @@ M._defaults = {
     },
     select_model = '<leader>v?', -- Select model command
     select_history = '<leader>vh', -- Select history command
+    select_acp_model = '<leader>vM', -- Select ACP model
+    select_acp_mode = '<leader>vm', -- Select ACP mode
     confirm = {
       focus_window = '<C-w>f',
       code = 'c',
@@ -1223,7 +1225,7 @@ require('which-key').add {
       desc = 'Optimize Code(ask)',
     },
     {
-      '<leader>vm',
+      '<leader>vi',
       function()
         require('avante.api').ask { question = avante_summarize }
       end,
